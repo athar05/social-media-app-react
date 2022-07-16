@@ -8,9 +8,6 @@ const App=() =>
 <Router>
  <Fragment>
   <PageRoutes/>
-  <div> 
-  <Link to="/bookmark"> Hello</Link>
-  </div>
   </Fragment>
  </Router>
 
