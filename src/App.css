@@ -114,6 +114,8 @@ body {
   width: 100%;
 }
 
+/* Landing Page */
+
 .landing {
   position: relative;
   height: 100vh;
@@ -135,6 +137,7 @@ Button {
   margin: 0.5rem 1rem;
 }
 
+/* Media Queries */
 
 @media only screen and (max-width: 600px) {
 
