@@ -13,7 +13,7 @@ const LandingBody = () => {
         </p>
         <Stack direction='row' spacing={2}>
           <Link to="/login" className='links'><Button variant='contained' className="button">Login</Button></Link>
-        <Link to="/register" className='links'><Button variant='contained' className="button">Register</Button></Link>
+        <Link to="/signup" className='links'><Button variant='contained' className="button">Register</Button></Link>
         </Stack>
       </div>
     </div>

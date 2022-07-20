@@ -17,7 +17,7 @@ const PageRoutes = () => {
     <Route exact path="/explore" element={<Explore />}/>
     <Route exact path="/bookmark" element={<Bookmark />}/>
     <Route exact path="/login" element={<Login />}/>
-    <Route exact path="/register" element={<Signup />}/>
+    <Route exact path="/signup" element={<Signup />}/>
     <Route exact path="/signout" element={<Signout />}/>
     <Route exact path="/profile" element={<UserProfile />}/>
     </Routes>
