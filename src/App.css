@@ -51,11 +51,11 @@ body {
 }
 
 .text-primary {
-  color: var(--primary-color);
+  color: var(--primary) !important;
 }
 
 .text-dark {
-  color: var(--dark-color);
+  color: var(--black);
 }
 
 /* Padding */
@@ -122,7 +122,7 @@ body {
 
 .button{
   color: var(--white) !important;
-  transition: 1ms;
+  transition: 1ms ;
 }
 
 .button:hover {
@@ -132,7 +132,10 @@ body {
 
 /* Landing Page */
 
-.landing {
+.landing, .sign-up {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
   height: 100vh;
   background: url('../src/images/landing-background.jpg') no-repeat center center/cover;
@@ -151,6 +154,19 @@ body {
 
 Button {
   margin: 0.5rem 1rem;
+}
+
+/* Form */
+
+.form-wrapper {
+  padding: 30px 20px;
+  width: 30%;
+  margin: 0 auto;
+  color: var(--primary);
+}
+
+.form-wrapper .form-avatar {
+  background-color: var(--primary);
 }
 
 /* Media Queries */
