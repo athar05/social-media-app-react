@@ -14,8 +14,8 @@ const Navbar = () => {
                 ENTREPRENEUR CONNECT
             </Typography>
             <Stack direction='row' spacing={2}>
-            <Link to='/login' style={{textDecoration: 'none'}}><Button style={{color: 'white'}}>Login</Button></Link>
-            <Link to='/register' style={{textDecoration: 'none'}}><Button style={{color: 'white'}}>Register</Button></Link>
+            <Link to='/login' className='links'><Button className='button'>Login</Button></Link>
+            <Link to='/register' className='links'><Button className='button'>Register</Button></Link>
             </Stack>
         </Toolbar> 
 

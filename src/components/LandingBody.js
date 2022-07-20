@@ -12,8 +12,8 @@ const LandingBody = () => {
           A platform to connect with other entrepreneurs, VCs and peers.
         </p>
         <Stack direction='row' spacing={2}>
-          <Link to="/login" style={{textDecoration: 'none'}}><Button variant='contained' className="buttons">Login</Button></Link>
-        <Link to="/register" style={{textDecoration: 'none'}}><Button variant='contained' className="buttons">Register</Button></Link>
+          <Link to="/login" className='links'><Button variant='contained' className="button">Login</Button></Link>
+        <Link to="/register" className='links'><Button variant='contained' className="button">Register</Button></Link>
         </Stack>
       </div>
     </div>

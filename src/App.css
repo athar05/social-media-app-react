@@ -110,8 +110,24 @@ body {
   margin: 3rem 0;
 }
 
+/* Navbar */
+
 .navbar {
   width: 100%;
+}
+
+.links {
+  text-decoration: none;
+}
+
+.button{
+  color: var(--white) !important;
+  transition: 1ms;
+}
+
+.button:hover {
+  background-color: white !important;
+  color: var(--primary) !important;
 }
 
 /* Landing Page */
