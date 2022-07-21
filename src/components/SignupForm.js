@@ -1,9 +1,15 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { Avatar, Button, Grid, Paper, TextField, Typography, Box } from '@mui/material';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Link } from 'react-router-dom';
 
 const SignupForm = () => {
+
+  const fNameInputRef = useRef();
+  const lNameInputRef = useRef();
+  const emailInputRef = useRef();
+  const passwordInputRef= useRef()
+
   return (
     <section className='sign-up'>
     <Grid>
@@ -17,19 +23,19 @@ const SignupForm = () => {
         </Grid>
         <form>
           <Box m={1}>
-          <TextField fullWidth name='fname' label='First Name' autoFocus={true} variant="standard" type="text" required={true}/>
+          <TextField fullWidth name='fname' label='First Name' autoFocus={true} variant="standard" type="text" required={true} ref={fNameInputRef}/>
           </Box>
           <Box m={1}>
-          <TextField fullWidth name='lname' label='Last Name' variant="standard" type="text"/>
+          <TextField fullWidth name='lname' label='Last Name' variant="standard" type="text" ref={lNameInputRef}/>
           </Box>
           <Box m={1}>
-          <TextField fullWidth name='email 'label='Email' variant="standard" type="text" required={true}/>
+          <TextField fullWidth name='email 'label='Email' variant="standard" type="text" required={true} ref={emailInputRef}/>
           </Box>
           <Box m={1}>   
           <TextField fullWidth name='password' label='Password' variant="standard" type="password" required={true} minLength="6"/>
           </Box>
           <Box m={1}>
-          <TextField fullWidth name='confirm-password' label='Re-enter Password' variant="standard" type="password" required={true} minLength="6"/>
+          <TextField fullWidth name='confirm-password' label='Re-enter Password' variant="standard" type="password" required={true} minLength="6" ref={passwordInputRef}/>
           </Box>
           <Box m={1} pt={2}>
           <Button type='submit' variant='contained' className='button'>Sign Up</Button>
