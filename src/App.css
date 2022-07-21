@@ -160,9 +160,10 @@ Button {
 
 .form-wrapper {
   padding: 30px 20px;
-  width: 30%;
+  width: 500px;
   margin: 0 auto;
   color: var(--primary);
+  /* overflow: hidden; */
 }
 
 .form-wrapper .form-avatar {

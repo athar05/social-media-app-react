@@ -16,11 +16,21 @@ const SignupForm = () => {
           <Typography className='py-1 text-dark'>Please Fill This Form To Create An Account </Typography>
         </Grid>
         <form>
+          <Box m={1}>
           <TextField fullWidth name='fname' label='First Name' autoFocus={true} variant="standard" type="text" required={true}/>
+          </Box>
+          <Box m={1}>
           <TextField fullWidth name='lname' label='Last Name' variant="standard" type="text"/>
+          </Box>
+          <Box m={1}>
           <TextField fullWidth name='email 'label='Email' variant="standard" type="text" required={true}/>
+          </Box>
+          <Box m={1}>   
           <TextField fullWidth name='password' label='Password' variant="standard" type="password" required={true} minLength="6"/>
+          </Box>
+          <Box m={1}>
           <TextField fullWidth name='confirm-password' label='Re-enter Password' variant="standard" type="password" required={true} minLength="6"/>
+          </Box>
           <Box m={1} pt={2}>
           <Button type='submit' variant='contained' className='button'>Sign Up</Button>
           </Box>
