@@ -2,13 +2,45 @@ import React, {useRef} from 'react';
 import { Avatar, Button, Grid, Paper, TextField, Typography, Box } from '@mui/material';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const SignupForm = () => {
 
   const fNameInputRef = useRef();
   const lNameInputRef = useRef();
   const emailInputRef = useRef();
-  const passwordInputRef= useRef()
+  const passwordInputRef = useRef();
+  const reenteredPassowrdInputRef = useRef();
+
+  const registerUser = async (userInfo)=> {
+    console.log('function called')
+   const {data}= await axios.post("/api/auth/signup", userInfo)
+   const {createdUser, encodedToken} = await data
+   localStorage.setItem('user', JSON.stringify(createdUser));
+   localStorage.setItem('auth_token', JSON.stringify(encodedToken))
+   console.log(localStorage.getItem('user'))
+  }
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    console.log("form submitted")
+
+    const enteredFirstName = fNameInputRef.current.value; 
+    const enteredLastName = lNameInputRef.current.value;
+    const enteredEmail = emailInputRef.current.value;
+    const enteredPassword= passwordInputRef.current.value; 
+
+    const contactInfo = {firstName: enteredFirstName,
+      lastName: enteredLastName, 
+      email: enteredEmail, 
+      password: enteredPassword,
+      profile: "",
+      describtion: '',
+      }
+
+      registerUser(contactInfo)
+    }
+
 
   return (
     <section className='sign-up'>
@@ -21,7 +53,7 @@ const SignupForm = () => {
           <h2>Sign Up</h2>
           <Typography className='py-1 text-dark'>Please Fill This Form To Create An Account </Typography>
         </Grid>
-        <form>
+        <form onSubmit={submitHandler}>
           <Box m={1}>
           <TextField fullWidth name='fname' label='First Name' autoFocus={true} variant="standard" type="text" required={true} ref={fNameInputRef}/>
           </Box>
@@ -32,15 +64,15 @@ const SignupForm = () => {
           <TextField fullWidth name='email 'label='Email' variant="standard" type="text" required={true} ref={emailInputRef}/>
           </Box>
           <Box m={1}>   
-          <TextField fullWidth name='password' label='Password' variant="standard" type="password" required={true} minLength="6"/>
+          <TextField fullWidth name='password' label='Password' variant="standard" type="password" required={true} minLength="6" ref={passwordInputRef}/>
           </Box>
           <Box m={1}>
-          <TextField fullWidth name='confirm-password' label='Re-enter Password' variant="standard" type="password" required={true} minLength="6" ref={passwordInputRef}/>
+          <TextField fullWidth name='confirm-password' label='Re-enter Password' variant="standard" type="password" required={true} minLength="6" ref={reenteredPassowrdInputRef}/>
           </Box>
           <Box m={1} pt={2}>
           <Button type='submit' variant='contained' className='button'>Sign Up</Button>
           </Box>
-          <p class="my-1">Already have an account? <Link to="/login">Sign In</Link></p>
+          <p className="my-1">Already have an account? <Link to="/login">Sign In</Link></p>
         </form>
       </Paper>
     </Grid>
