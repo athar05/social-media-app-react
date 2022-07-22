@@ -3,22 +3,24 @@ import { Avatar, Button, Grid, Paper, TextField, Typography, Box } from '@mui/ma
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import {signUp} from "../features/auth/authSlice"
+import { useDispatch, useSelector } from 'react-redux';
 
 const SignupForm = () => {
+
+  const dispatch = useDispatch();
 
   const fNameInputRef = useRef();
   const lNameInputRef = useRef();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const reenteredPassowrdInputRef = useRef();
-
   const registerUser = async (userInfo)=> {
-    console.log('function called')
    const {data}= await axios.post("/api/auth/signup", userInfo)
    const {createdUser, encodedToken} = await data
    localStorage.setItem('user', JSON.stringify(createdUser));
    localStorage.setItem('auth_token', JSON.stringify(encodedToken))
-   console.log(localStorage.getItem('user'))
+   return { user: createdUser, token: encodedToken };
   }
 
   const submitHandler = (event) => {
@@ -34,11 +36,9 @@ const SignupForm = () => {
       lastName: enteredLastName, 
       email: enteredEmail, 
       password: enteredPassword,
-      profile: "",
-      describtion: '',
       }
 
-      registerUser(contactInfo)
+      registerUser(contactInfo).then(({user, token})=> dispatch(signUp({user,token})))
     }
 
 
