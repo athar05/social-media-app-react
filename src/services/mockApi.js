@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'; 
 
-export const authApi = createApi({
-    reducerPath: "authApi", 
+export const mockApi = createApi({
+    reducerPath: "mockApi", 
     baseQuery: fetchBaseQuery({
-        baseUrl: "api/auth/", 
+        baseUrl: "/api", 
         prepareHeaders: (headers) => {
             const token = JSON.parse(localStorage.getItem("token"))
             if (token) {

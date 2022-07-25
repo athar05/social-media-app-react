@@ -11,8 +11,7 @@ const authSlice = createSlice({
     initialState, 
     reducers: {
         signUp:(state, action)=> {
-            const {user, token} = action.payload; 
-            // state.token= localStorage.setItem("token", token);
+            const {user} = action.payload; 
             state.isAuthenticated= true; 
             state.user= user;
         }, 

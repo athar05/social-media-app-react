@@ -2,8 +2,12 @@ import React from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Stack, Button } from '@mui/material';
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import {Link} from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
+
+  const authStatus = localStorage.getItem("auth_token")
+
   return (
     <AppBar position='static' className='navbar'>
         <Toolbar>
@@ -14,7 +18,13 @@ const Navbar = () => {
                 ENTREPRENEUR CONNECT
             </Typography>
             <Stack direction='row' spacing={2}>
-            <Link to='/login' className='links'><Button className='button'>Login</Button></Link>
+              {
+                authStatus? (<Link to='/signout' className='links'><Button className='button'>Logout</Button></Link>)
+                :
+                (
+                  (<Link to='/login' className='links'><Button className='button'>Login</Button></Link>)
+                )
+              }
             </Stack>
         </Toolbar> 
 

@@ -8,10 +8,12 @@ import { setAlert, removeAlert } from '../features/auth/alertSlice';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 import Alerts from './Alerts';
+import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
 //stores inputs
   const fNameInputRef = useRef();
@@ -34,7 +36,6 @@ const SignupForm = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(fNameInputRef.current)
     const enteredFirstName = fNameInputRef.current.value; 
     const enteredLastName = lNameInputRef.current.value;
     const enteredEmail = emailInputRef.current.value;
@@ -47,8 +48,6 @@ const SignupForm = () => {
     const password_condition_2 = /^(?=.*[A-Z]).{6,20}$/;
     const password_condition_3 = /^(?=.*[a-z]).{6,20}$/;
     const email_condition =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-    console.log(email_condition.test(enteredEmail))
 
     if(enteredFirstName.length <= 1){
       dispatch(setAlert("First Name Should Be More Than 1 Character", "error", id))
@@ -84,9 +83,19 @@ const SignupForm = () => {
         password: enteredPassword,
         }
         //sends request to server and dispatches action to update auth status
-        registerUser(contactInfo).then(({user, token})=> dispatch(signUp({user,token})))
-        dispatch(setAlert("Sign Up Successful", "success", id))
-        setTimeout(()=> dispatch(removeAlert(id)), 5000)
+        registerUser(contactInfo)
+        .then(({user, token})=> dispatch(signUp({user,token})))
+        .then(()=> dispatch(setAlert("Sign Up Successful", "success", id)), setTimeout(()=> dispatch(removeAlert(id))))
+        // .then(()=> 	navigate("/home", { replace: true }))
+        .catch((e)=> {
+          if (e.response.status === 422) {
+            dispatch(setAlert("Username Already Exists", "error", id))
+            setTimeout(()=> dispatch(removeAlert(id)), 5000)
+          } else {
+            dispatch(setAlert(e.response.status, "error", id))
+            setTimeout(()=> dispatch(removeAlert(id)), 5000)
+          }
+        })
       }
     }
 
