@@ -112,6 +112,17 @@ body {
   margin: 3rem 0;
 }
 
+.flex-row-justified {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Navbar */
 
 .navbar {
@@ -134,7 +145,7 @@ body {
 
 /* Landing Page */
 
-.landing, .sign-up {
+.landing, .sign-up, .sign-in {
   display: flex;
   flex-direction: column;
   justify-content: center;
