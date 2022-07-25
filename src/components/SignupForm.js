@@ -86,7 +86,7 @@ const SignupForm = () => {
         registerUser(contactInfo)
         .then(({user, token})=> dispatch(signUp({user,token})))
         .then(()=> dispatch(setAlert("Sign Up Successful", "success", id)), setTimeout(()=> dispatch(removeAlert(id))))
-        // .then(()=> 	navigate("/home", { replace: true }))
+        .then(()=> 	navigate("/home", { replace: true }))
         .catch((e)=> {
           if (e.response.status === 422) {
             dispatch(setAlert("Username Already Exists", "error", id))
