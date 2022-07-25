@@ -33,6 +33,7 @@ const SignupForm = () => {
    return { user: createdUser, token: encodedToken };
   }
 
+   //function when user submits the form
 
   const submitHandler = (event) => {
     event.preventDefault();

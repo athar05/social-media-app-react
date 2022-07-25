@@ -19,7 +19,7 @@ const SigninForm = () => {
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
 
-    //function to sign a user in 
+    //function to send a sign in request to a user
 
     const signIn = (user) => {
         return axios 
@@ -27,7 +27,7 @@ const SigninForm = () => {
         .then((res)=> console.log(res))
     }
 
-    //function to log in guest logins
+    //function to send a guest sign in request to a server
     const guestLoginHandler = (e) => {
         e.preventDefault();
 
@@ -46,7 +46,7 @@ const SigninForm = () => {
         const enteredPassword = passwordInputRef.current.value; 
     
 
-        //email validation 
+        //form validation 
 
         const email_condition =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
