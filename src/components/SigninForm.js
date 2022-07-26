@@ -2,7 +2,7 @@ import React, {useRef, Fragment} from 'react';
 import { Avatar, Button, Grid, Paper, TextField, Typography, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import {signUp} from "../features/auth/authSlice"
+import {signIn} from "../features/auth/authSlice"
 import { setAlert, removeAlert } from '../features/auth/alertSlice';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
@@ -24,7 +24,7 @@ const SigninForm = () => {
     const signIn = (user) => {
         return axios 
         .post("api/auth/login", user)
-        .then((res)=> console.log(res))
+        .then((res)=> console.log(res.data))
     }
 
     //function to send a guest sign in request to a server

@@ -18,7 +18,7 @@ const SignupForm = () => {
 //stores inputs
   const fNameInputRef = useRef();
   const lNameInputRef = useRef();
-  const emailInputRef = useRef();
+  const usernameInputRef = useRef();
   const passwordInputRef = useRef();
   const reenteredPassowrdInputRef = useRef();
 
@@ -39,7 +39,7 @@ const SignupForm = () => {
     event.preventDefault();
     const enteredFirstName = fNameInputRef.current.value; 
     const enteredLastName = lNameInputRef.current.value;
-    const enteredEmail = emailInputRef.current.value;
+    const enteredUsername = usernameInputRef.current.value;
     const enteredPassword= passwordInputRef.current.value; 
     const reEnteredPassword = reenteredPassowrdInputRef.current.value;
 
@@ -48,16 +48,20 @@ const SignupForm = () => {
     const password_condition_1 = /^(?=.*[0-9]).{6,20}$/;
     const password_condition_2 = /^(?=.*[A-Z]).{6,20}$/;
     const password_condition_3 = /^(?=.*[a-z]).{6,20}$/;
-    const email_condition =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const username_condition_1 =  /^[0-9a-zA-Z]+$/;
+    const username_condition_2 = /^[a-zA-Z]/;
 
     if(enteredFirstName.length <= 1){
       dispatch(setAlert("First Name Should Be More Than 1 Character", "error", id))
       setTimeout(() => dispatch(removeAlert(id)), 5000)
-    } else if (!enteredEmail.trim()) {
-      dispatch(setAlert("Email Is Required", "error", id))
+    } else if (!enteredUsername.trim()) {
+      dispatch(setAlert("Username Is Required", "error", id))
       setTimeout(() => dispatch(removeAlert(id)), 5000)
-    } else if (!email_condition.test(enteredEmail)) {
-      dispatch(setAlert("Please Enter A Valid Email Address", "error", id))
+    } else if (!username_condition_2.test(enteredUsername)) {
+      dispatch(setAlert("Username Should Begin With A Letter", "error", id))
+      setTimeout(() => dispatch(removeAlert(id)), 5000)
+    } else if (!username_condition_1.test(enteredUsername) || enteredUsername.length < 4) {
+      dispatch(setAlert("Username Should Have Atleast 4 Characters And Can Only Contain Letters & Numbers", "error", id))
       setTimeout(() => dispatch(removeAlert(id)), 5000)
     } else if (!enteredPassword || !reEnteredPassword) {
       dispatch(setAlert("Please Enter Passwords", "error", id))
@@ -68,19 +72,19 @@ const SignupForm = () => {
     } else if (!password_condition_1.test(enteredPassword)) {
       dispatch(setAlert("Password Must Contain Atleast One Number", "error", id))
       setTimeout(() => dispatch(removeAlert(id)), 5000)
+    } else if (enteredPassword !== reEnteredPassword) {
+      dispatch(setAlert("Passwords Do Not Match", "error", id))
+      setTimeout(() => dispatch(removeAlert(id)), 5000)
     } else if (!password_condition_2.test(reEnteredPassword)) {
       dispatch(setAlert("Passwords Must Contain At Least One Uppercase Letter", "error", id))
       setTimeout(() => dispatch(removeAlert(id)), 5000)
     } else if (!password_condition_3.test(reEnteredPassword)) {
       dispatch(setAlert("Passwords Must Contain At Least One Smallcase Letter", "error", id))
       setTimeout(() => dispatch(removeAlert(id)), 5000)
-    } else if (enteredPassword !== reEnteredPassword) {
-      dispatch(setAlert("Passwords Do Not Match", "error", id))
-      setTimeout(() => dispatch(removeAlert(id)), 5000)
     } else {
       const contactInfo = {firstName: enteredFirstName,
         lastName: enteredLastName, 
-        email: enteredEmail, 
+        username: enteredUsername, 
         password: enteredPassword,
         }
         //sends request to server and dispatches action to update auth status
@@ -123,7 +127,7 @@ const SignupForm = () => {
           <TextField fullWidth name='lname' label='Last Name' variant="standard" type="text" inputRef={lNameInputRef}/>
           </Box>
           <Box >
-          <TextField fullWidth name='email 'label='Email' variant="standard" type="text" required={true} inputRef={emailInputRef}/>
+          <TextField fullWidth name='username 'label='Username' variant="standard" type="text" required={true} inputRef={usernameInputRef}/>
           </Box>
           <Box >   
           <TextField fullWidth name='password' label='Password' variant="standard" type="password" required={true} minLength="6" inputRef={passwordInputRef}/>
