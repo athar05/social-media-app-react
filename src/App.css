@@ -145,7 +145,7 @@ body {
 
 /* Landing Page */
 
-.landing, .sign-up, .sign-in {
+.landing, .sign-up, .sign-in, .sign-out {
   display: flex;
   flex-direction: column;
   justify-content: center;
