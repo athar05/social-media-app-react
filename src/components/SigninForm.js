@@ -9,7 +9,7 @@ import { setAlert, removeAlert } from '../features/auth/alertSlice';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 import Alerts from './Alerts';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; 
 import LoginIcon from '@mui/icons-material/Login';
 
 const SigninForm = () => {
@@ -33,7 +33,6 @@ const SigninForm = () => {
 
     const signInUser = async (userInfo) => {
       const {data}= await axios.post("api/auth/login", userInfo);
-      console.log(data)
       const {createdUser, encodedToken} = await data;
       localStorage.setItem('user', JSON.stringify(createdUser));
       localStorage.setItem('auth_token', JSON.stringify(encodedToken))
@@ -54,7 +53,6 @@ const SigninForm = () => {
         .then(()=> setTimeout(()=> dispatch(removeAlert(id))))
         .then(()=> 	navigate("/home", { replace: true }))
         .catch((e)=> {
-          console.log(e.response)
           if (e.response.status=== 422) {
             dispatch(setAlert("Username Already Exists", "error", id))
             setTimeout(()=> dispatch(removeAlert(id)), 5000)
@@ -80,7 +78,6 @@ const SigninForm = () => {
             password: enteredPassword
         }
 
-        console.log(user)
 
         if (!enteredUsername || enteredUsername.length <= 4 ) {
             dispatch(setAlert("Enter A Valid Username", "error", id))

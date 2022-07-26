@@ -7,7 +7,9 @@ import { signOut } from '../features/auth/authSlice';
 
 const Navbar = () => {
 
+  // const authStatus = localStorage.getItem("auth_token")
   const authStatus = localStorage.getItem("auth_token")
+  console.log(authStatus)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -22,7 +24,11 @@ const Navbar = () => {
     <AppBar position='static' className='navbar'>
         <Toolbar>
             <IconButton size="large" edge="start" color="inherit" aria-label='logo'> 
-                <ConnectWithoutContactIcon/ >
+            {
+              (authStatus) ? ( <Link to="/home"> <ConnectWithoutContactIcon/ > </Link>) 
+              :
+               ( <Link to="/"> <ConnectWithoutContactIcon/ > </Link>)
+            }
             </IconButton>
             <Typography variant='h6' component='div' sx={{flexGrow: 1}} className="brand-logo">
                 ENTREPRENEUR CONNECT
@@ -37,7 +43,6 @@ const Navbar = () => {
               }
             </Stack>
         </Toolbar> 
-
     </AppBar>
   )
 }

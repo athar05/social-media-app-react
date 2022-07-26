@@ -2,12 +2,8 @@ import React from 'react';
 import { Paper, Grid, Avatar, Button, Box } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 const LogoutCard = () => {
-
-    const authStatus= useSelector((state)=> state.auth.isAuthenticated)
-    console.log(authStatus)
 
   return (
     <section className='sign-out'>

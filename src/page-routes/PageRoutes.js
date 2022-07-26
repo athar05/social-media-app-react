@@ -9,10 +9,9 @@ import Signout from "../pages/Signout";
 import Signup from "../pages/Signup";
 import UserProfile from "../pages/UserProfile";
 import RequiresAuth from '../components/RequiresAuth';
-import { useSelector } from 'react-redux';
 
 const PageRoutes = () => {
-  const loginState = useSelector((state)=> state.auth.isAuthenticated)
+  const loginState = localStorage.getItem("auth_token")
   return (
     <Routes>
     <Route exact path="/" element={<LandingPage />}/>
