@@ -14,7 +14,7 @@ const Navbar = () => {
   const clickHandler = () => {
     localStorage.removeItem("auth_token")
     localStorage.removeItem("user")
-    dispatch(signOut)
+    dispatch(signOut())
     navigate("/signout")
   }
 
