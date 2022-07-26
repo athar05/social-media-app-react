@@ -1,6 +1,6 @@
 import { authApi } from "./authApi";
 
-export const extendedAuthApi = authApi.injectEndpoints({
+export const extendedApi = authApi.injectEndpoints({
     endpoints: (builder)=> ({
         registerUser: builder.mutation({
             query: contactInfo => ({
@@ -12,4 +12,4 @@ export const extendedAuthApi = authApi.injectEndpoints({
     })
 })
 
-export const {useRegisterUserMutation} = extendedAuthApi;
+export const {useRegisterUserMutation} = extendedApi;
