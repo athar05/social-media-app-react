@@ -20,8 +20,9 @@ const authSlice = createSlice({
             state.isAuthenticated= true; 
             state.user= user;
         }, 
-        signOut: (state, action)=> {
-
+        signOut: (state)=> {
+            state.isAuthenticated= false;
+            state.user=null; 
         }, 
         updateUser: (state, action)=> {
 
