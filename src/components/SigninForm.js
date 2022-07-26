@@ -1,5 +1,7 @@
-import React, {useRef, Fragment} from 'react';
-import { Avatar, Button, Grid, Paper, TextField, Typography, Box } from '@mui/material';
+import React, {useRef, Fragment, useState} from 'react';
+import { Avatar, Button, Grid, Paper, TextField, Typography, Box, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, Input } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import {signIn} from "../features/auth/authSlice"
@@ -16,8 +18,16 @@ const SigninForm = () => {
 
     const dispatch =useDispatch();
 
-    const emailInputRef = useRef();
+    const usernameInputRef = useRef();
     const passwordInputRef = useRef();
+
+    //show/hide password functionality
+
+    const [showPassword, setShowPassword] = useState(false)
+
+    const showPassowordHandler = () => {
+      setShowPassword((prev)=> !prev)
+    }
 
     //function to send a sign in request to a user
 
@@ -42,21 +52,21 @@ const SigninForm = () => {
     const submitHandler = (e) => {
         e.preventDefault();
 
-        const enteredEmail = emailInputRef.current.value; 
+        const enteredUsername = usernameInputRef.current.value; 
         const enteredPassword = passwordInputRef.current.value; 
     
 
         //form validation 
 
-        const email_condition =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
         const user = {
-            username: enteredEmail,
-            passowrd: enteredPassword
+            username: enteredUsername,
+            password: enteredPassword
         }
 
-        if (!enteredEmail || !email_condition.test(enteredEmail)) {
-            dispatch(setAlert("Enter A Valid Email Address", "error", id))
+        console.log(user)
+
+        if (!enteredUsername || enteredUsername.length <= 4 ) {
+            dispatch(setAlert("Enter A Valid Username", "error", id))
             setTimeout(() => {
                 dispatch(removeAlert(id))
             }, 5000);
@@ -91,12 +101,31 @@ const clearInputFields = () => {
           <section>
             <Alerts />
           </section>
-          <Box >
-          <TextField fullWidth name='email 'label='Email' variant="standard" type="text" required={true} inputRef={emailInputRef}/>
-          </Box>
-          <Box >   
-          <TextField fullWidth name='password' label='Password' variant="standard" type="password" required={true} inputRef={passwordInputRef}/>
-          </Box>
+          <FormControl fullWidth sx={{ m: 1}}>
+          <TextField fullWidth name='username 'label='username' variant="standard" type="text" required={true} inputRef={usernameInputRef}/>
+          </FormControl>
+          <FormControl required={true} variant='standard' fullWidth sx={{ m: 1}}>
+          <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+          <Input
+          fullWidth
+          name='password'
+          variant='standard'
+            type={showPassword ? 'text' : 'password'}
+            inputRef={passwordInputRef}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={showPassowordHandler}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+          />
+          </FormControl>
           <div className='flex-row-justified'>
           <Box m={1} pt={2}>
           <Button type='submit' variant='contained' className='button' >Sign In</Button>

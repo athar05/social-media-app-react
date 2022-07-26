@@ -1,5 +1,5 @@
-import React, {useRef} from 'react';
-import { Avatar, Button, Grid, Paper, TextField, Typography, Box } from '@mui/material';
+import React, {useRef, useState} from 'react';
+import { Avatar, Button, Grid, Paper, TextField, Typography, FormControl, InputLabel, Input, InputAdornment, IconButton } from '@mui/material';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -9,11 +9,21 @@ import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 import Alerts from './Alerts';
 import { useNavigate } from "react-router-dom";
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Visibility from '@mui/icons-material/Visibility';
 
 const SignupForm = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  //function to show/hide passoword value to users 
+
+  const [showPassword, setShowPassword] = useState(false)
+
+  const showPassowordHandler = () => {
+    setShowPassword((prev)=> !prev)
+  }
 
 //stores inputs
   const fNameInputRef = useRef();
@@ -21,8 +31,6 @@ const SignupForm = () => {
   const usernameInputRef = useRef();
   const passwordInputRef = useRef();
   const reenteredPassowrdInputRef = useRef();
-
-
 
   //function to send a sign up request to the server
   const registerUser = async (userInfo)=> {
@@ -90,7 +98,8 @@ const SignupForm = () => {
         //sends request to server and dispatches action to update auth status
         registerUser(contactInfo)
         .then(({user, token})=> dispatch(signUp({user,token})))
-        .then(()=> dispatch(setAlert("Sign Up Successful", "success", id)), setTimeout(()=> dispatch(removeAlert(id))))
+        .then(()=> dispatch(setAlert("Sign Up Successful", "success", id)))
+        .then(()=> setTimeout(()=> dispatch(removeAlert(id))))
         .then(()=> 	navigate("/home", { replace: true }))
         .catch((e)=> {
           if (e.response.status === 422) {
@@ -120,24 +129,60 @@ const SignupForm = () => {
           <section>
             <Alerts />
           </section>
-          <Box >
-          <TextField fullWidth name='fname' label='First Name' autoFocus={true} variant="standard" type="text" required={true} inputRef={fNameInputRef}/>
-          </Box>
-          <Box >
-          <TextField fullWidth name='lname' label='Last Name' variant="standard" type="text" inputRef={lNameInputRef}/>
-          </Box>
-          <Box >
-          <TextField fullWidth name='username 'label='Username' variant="standard" type="text" required={true} inputRef={usernameInputRef}/>
-          </Box>
-          <Box >   
-          <TextField fullWidth name='password' label='Password' variant="standard" type="password" required={true} minLength="6" inputRef={passwordInputRef}/>
-          </Box>
-          <Box>
-          <TextField fullWidth name='confirm-password' label='Re-enter Password' variant="standard" type="password" required={true} minLength="6" inputRef={reenteredPassowrdInputRef}/>
-          </Box>
-          <Box m={1} pt={2}>
-          <Button type='submit' variant='contained' className='button'>Sign Up</Button>
-          </Box>
+          <FormControl fullWidth sx={{ m: 1}} >
+          <TextField name='fname' label='First Name' autoFocus={true} variant="standard" type="text" required={true} inputRef={fNameInputRef}/>
+          </FormControl>
+          <FormControl fullWidth sx={{ m: 1}} >
+          <TextField name='lname' label='Last Name' variant="standard" type="text" inputRef={lNameInputRef}/>
+          </FormControl>
+          <FormControl fullWidth sx={{ m: 1}} >
+          <TextField name='username 'label='Username' variant="standard" type="text" required={true} inputRef={usernameInputRef}/>
+          </FormControl>
+          <FormControl required={true} variant='standard' fullWidth sx={{ m: 1}}>
+          <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+          <Input
+          name='password'
+          variant='standard'
+            type={showPassword ? 'text' : 'password'}
+            inputRef={passwordInputRef}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={showPassowordHandler}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+          />
+          </FormControl>
+          <FormControl required={true} variant='standard' fullWidth sx={{ m: 1}}>
+          <InputLabel htmlFor="standard-adornment-password">Re-enter Password</InputLabel>
+          <Input
+          name='password'
+          variant='standard'
+            type={showPassword ? 'text' : 'password'}
+            inputRef={reenteredPassowrdInputRef}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={showPassowordHandler}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+          />
+          </FormControl>
+          <FormControl sx={{ m: 1}}>
+          <Button  type='submit' variant='contained' className='button'>Sign Up</Button>
+          </FormControl>
           <p className="my-1">Already have an account? <Link to="/login">Sign In</Link></p>
         </form>
       </Paper>
