@@ -41,6 +41,16 @@ const SignupForm = () => {
    return { user: createdUser, token: encodedToken };
   }
 
+  //function to clear input fields after user submits the form 
+
+  const clearInputFields = () => {
+    fNameInputRef.current.value = "";
+    lNameInputRef.current.value= "";
+    usernameInputRef.current.value="";
+    passwordInputRef.current.value="";
+    reenteredPassowrdInputRef.current.value="";
+  }
+
    //function when user submits the form
 
   const submitHandler = (event) => {
@@ -111,6 +121,8 @@ const SignupForm = () => {
           }
         })
       }
+
+      clearInputFields()
     }
 
 

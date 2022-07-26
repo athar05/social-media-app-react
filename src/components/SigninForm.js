@@ -17,6 +17,7 @@ const SigninForm = () => {
     const id = nanoid()
 
     const dispatch =useDispatch();
+    const navigate = useNavigate()
 
     const usernameInputRef = useRef();
     const passwordInputRef = useRef();
@@ -31,10 +32,13 @@ const SigninForm = () => {
 
     //function to send a sign in request to a user
 
-    const signIn = (user) => {
-        return axios 
-        .post("api/auth/login", user)
-        .then((res)=> console.log(res.data))
+    const signInUser = async (userInfo) => {
+      const {data}= await axios.post("api/auth/login", userInfo);
+      console.log(data)
+      const {createdUser, encodedToken} = await data;
+      localStorage.setItem('user', JSON.stringify(createdUser));
+      localStorage.setItem('auth_token', JSON.stringify(encodedToken))
+      return { user: createdUser, token: encodedToken };
     }
 
     //function to send a guest sign in request to a server
@@ -45,7 +49,21 @@ const SigninForm = () => {
             username: "adarshbalika",
             password: "adarshBalika123"
         }
-        signIn(user)
+        signInUser(user)
+        .then(({user, token})=> dispatch(signIn({user,token})))
+        .then(()=> dispatch(setAlert("Sign Up Successful", "success", id)))
+        .then(()=> setTimeout(()=> dispatch(removeAlert(id))))
+        .then(()=> 	navigate("/home", { replace: true }))
+        .catch((e)=> {
+          console.log(e.response)
+          if (e.response.status=== 422) {
+            dispatch(setAlert("Username Already Exists", "error", id))
+            setTimeout(()=> dispatch(removeAlert(id)), 5000)
+          } else {
+            dispatch(setAlert(e.response.status, "error", id))
+            setTimeout(()=> dispatch(removeAlert(id)), 5000)
+          }
+        })
     }
 
     //function when user submits the form
@@ -77,13 +95,29 @@ const SigninForm = () => {
             }, 5000);   
         } else {
             signIn(user)
+            .then(({user, token})=> dispatch(signIn({user,token})))
+        .then(()=> dispatch(setAlert("Sign Up Successful", "success", id)))
+        .then(()=> setTimeout(()=> dispatch(removeAlert(id))))
+        .then(()=> 	navigate("/home", { replace: true }))
+        .catch((e)=> {
+          if (e.response.status === 422) {
+            dispatch(setAlert("Username Already Exists", "error", id))
+            setTimeout(()=> dispatch(removeAlert(id)), 5000)
+          } else {
+            dispatch(setAlert(e.response.status, "error", id))
+            setTimeout(()=> dispatch(removeAlert(id)), 5000)
+          }
+        })
         }
+
+        clearInputFields()
 }
 
     //function to clear input fields after the form is submitted
 
 const clearInputFields = () => {
-
+  usernameInputRef.current.value = "";
+  passwordInputRef.current.value="";
 }
 
   return (
