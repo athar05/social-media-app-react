@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import Sidebar from '../components/sidebar/Sidebar';
-
+import Feed from '../components/feed/Feed';
+import Navbar from "../components/Navbar"
 const Home = () => {
   return (
-    <div>
+    <Fragment>
+      <Navbar/>
+      <section className='home-body'>
       <Sidebar/>
-    </div>
+      <Feed/>
+      </section>
+    </Fragment>
   )
 }
 

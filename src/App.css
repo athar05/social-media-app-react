@@ -195,6 +195,12 @@ Button {
   color: var(--white);
 }
 
+/* home page */
+
+.home-body {
+  display: flex;
+}
+
 /* Media Queries */
 
 @media only screen and (max-width: 800px) {
