@@ -176,7 +176,6 @@ Button {
   width: 500px;
   margin: 0 auto;
   color: var(--primary);
-  /* overflow: hidden; */
 }
 
 .form-wrapper .form-avatar {
