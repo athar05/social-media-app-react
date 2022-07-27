@@ -4,6 +4,7 @@
   --black: black;
   --danger: #e74c3c;
   --success: #2ecc71;
+  --hover: #e8f5fe;
 }
 
 * {
@@ -17,7 +18,7 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   background-color: var(--white);
-  color: var(--primary)
+  /* color: var(--primary) */
 }
 
 /* Utilities */
