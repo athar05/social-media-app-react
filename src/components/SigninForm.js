@@ -1,5 +1,5 @@
-import React, {useRef, Fragment, useState} from 'react';
-import { Avatar, Button, Grid, Paper, TextField, Typography, Box, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, Input } from '@mui/material';
+import React, {useRef, useState} from 'react';
+import { Avatar, Button, Grid, Paper, TextField, Typography, Box, FormControl, InputLabel, InputAdornment, IconButton, Input } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Link } from 'react-router-dom';
@@ -93,7 +93,6 @@ const SigninForm = () => {
         } else {
             signInUser(user)
             .then(({user, token})=> dispatch(signIn({user,token})))
-            .then(()=> setTimeout(()=> console.log("hello"), 2000))
             .then(()=> dispatch(setAlert("Sign Up Successful", "success", id)))
             .then(()=> setTimeout(()=> dispatch(removeAlert(id)), 2000))
             .then(()=> 	navigate("/home", { replace: true }))
