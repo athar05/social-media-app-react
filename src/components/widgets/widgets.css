@@ -1,0 +1,36 @@
+.widgets {
+    flex: 0.3;
+}
+
+.widgets-input {
+    display: flex; 
+    align-items: center;
+    background-color: var(--background-color);
+    padding: 10px;
+    border-radius:20px ;
+    margin: 0 0 0 20px
+}
+
+.widgets-input:focus {
+    border: 1px solid var(--primary);
+}
+
+.widgets-input > input {
+    border: none;
+    background-color: var(--background-colo);
+    margin-left: 5px;
+    width: 90%;
+    line-height: 25px;
+}
+
+.widgets-input > input:focus {
+    outline: none;
+}
+
+.widgets-container {
+    margin-top: 15px;
+  margin-left: 20px;
+  padding: 20px;
+  background-color: var(--background-color);
+  border-radius: 20px;
+}
