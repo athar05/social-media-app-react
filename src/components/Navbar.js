@@ -9,7 +9,6 @@ const Navbar = () => {
 
   // const authStatus = localStorage.getItem("auth_token")
   const authStatus = localStorage.getItem("auth_token")
-  console.log(authStatus)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

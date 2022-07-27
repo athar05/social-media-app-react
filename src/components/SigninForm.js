@@ -33,6 +33,7 @@ const SigninForm = () => {
 
     const signInUser = async (userInfo) => {
       const {data}= await axios.post("api/auth/login", userInfo);
+      console.log(data)
       const {createdUser, encodedToken} = await data;
       localStorage.setItem('user', JSON.stringify(createdUser));
       localStorage.setItem('auth_token', JSON.stringify(encodedToken))
@@ -90,12 +91,12 @@ const SigninForm = () => {
                 dispatch(removeAlert(id))
             }, 5000);   
         } else {
-            signIn(user)
+            signInUser(user)
             .then(({user, token})=> dispatch(signIn({user,token})))
-        .then(()=> dispatch(setAlert("Sign Up Successful", "success", id)))
-        .then(()=> setTimeout(()=> dispatch(removeAlert(id))))
-        .then(()=> 	navigate("/home", { replace: true }))
-        .catch((e)=> {
+            .then(()=> dispatch(setAlert("Sign Up Successful", "success", id)))
+            .then(()=> setTimeout(()=> dispatch(removeAlert(id))))
+            .then(()=> 	navigate("/home", { replace: true }))
+            .catch((e)=> {
           if (e.response.status === 422) {
             dispatch(setAlert("Username Already Exists", "error", id))
             setTimeout(()=> dispatch(removeAlert(id)), 5000)
