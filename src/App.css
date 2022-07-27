@@ -2,6 +2,8 @@
   --primary: #1976D2; 
   --white: #fff;
   --black: black;
+  --danger: #e74c3c;
+  --success: #2ecc71;
 }
 
 * {
@@ -51,11 +53,11 @@ body {
 }
 
 .text-primary {
-  color: var(--primary-color);
+  color: var(--primary) !important;
 }
 
 .text-dark {
-  color: var(--dark-color);
+  color: var(--black);
 }
 
 /* Padding */
@@ -110,6 +112,17 @@ body {
   margin: 3rem 0;
 }
 
+.flex-row-justified {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Navbar */
 
 .navbar {
@@ -122,7 +135,7 @@ body {
 
 .button{
   color: var(--white) !important;
-  transition: 1ms;
+  transition: 1ms ;
 }
 
 .button:hover {
@@ -132,7 +145,10 @@ body {
 
 /* Landing Page */
 
-.landing {
+.landing, .sign-up, .sign-in, .sign-out {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
   height: 100vh;
   background: url('../src/images/landing-background.jpg') no-repeat center center/cover;
@@ -153,8 +169,36 @@ Button {
   margin: 0.5rem 1rem;
 }
 
+/* Form */
+
+.form-wrapper {
+  padding: 30px 20px;
+  width: 500px;
+  margin: 0 auto;
+  color: var(--primary);
+}
+
+.form-wrapper .form-avatar {
+  background-color: var(--primary);
+}
+
+/* Alerts */
+
+.alert-danger {
+  background-color: var(--danger);
+  color: var(--white)
+}
+
+.alert-success {
+  background-color: var(--success);
+  color: var(--white);
+}
+
 /* Media Queries */
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
 
+  .form-wrapper {
+    width: 70%;
+  }
 }

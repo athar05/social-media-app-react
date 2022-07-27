@@ -1,7 +1,7 @@
 import "./App.css";
 import {Fragment} from 'react';
 import PageRoutes from "./page-routes/PageRoutes";
-import {Link, BrowserRouter as Router} from "react-router-dom"
+import {BrowserRouter as Router} from "react-router-dom"
 
 
 const App=() => 
@@ -9,6 +9,6 @@ const App=() =>
  <Fragment>
   <PageRoutes/>
   </Fragment>
- </Router>
+</Router>
 
 export default App;

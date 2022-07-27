@@ -8,18 +8,25 @@ import Login from "../pages/Login";
 import Signout from "../pages/Signout";
 import Signup from "../pages/Signup";
 import UserProfile from "../pages/UserProfile";
+import RequiresAuth from '../components/RequiresAuth';
+import { useSelector } from 'react-redux';
 
 const PageRoutes = () => {
+  // const loginState = localStorage.getItem("auth_token")
+  const loginState= useSelector((state)=> state.auth.isAuthenticated) === true? localStorage.getItem("auth_token") : null; 
+  console.log(loginState)
+  // console.log(loginState2)
   return (
     <Routes>
+      {/* {console.log("login state", loginState)} */}
     <Route exact path="/" element={<LandingPage />}/>
-    <Route exact path="/home" element={<Home />}/>
-    <Route exact path="/explore" element={<Explore />}/>
-    <Route exact path="/bookmark" element={<Bookmark />}/>
+    <Route exact path="/home" element={<RequiresAuth login={loginState}><Home /></RequiresAuth>}/>
+    <Route exact path="/explore" element={<RequiresAuth login={loginState}><Explore /> </RequiresAuth>}/>
+    <Route exact path="/bookmark" element={<RequiresAuth login={loginState}><Bookmark /> </RequiresAuth>}/>
     <Route exact path="/login" element={<Login />}/>
     <Route exact path="/signup" element={<Signup />}/>
     <Route exact path="/signout" element={<Signout />}/>
-    <Route exact path="/profile" element={<UserProfile />}/>
+    <Route exact path="/profile" element={<RequiresAuth login={loginState}><UserProfile /> </RequiresAuth>}/>
     </Routes>
   )
 }
