@@ -3,6 +3,7 @@ import "./tweetbox.css"
 import { Avatar, Input, Button } from '@mui/material';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
+import GifBoxOutlinedIcon from '@mui/icons-material/GifBoxOutlined';
 
 const TweetBox = () => {
   return (
@@ -19,6 +20,7 @@ const TweetBox = () => {
                 <div className='tweet-box-utilities-left'>
                     <ImageOutlinedIcon/>
                     <EmojiEmotionsOutlinedIcon/>
+                    <GifBoxOutlinedIcon/>
                 </div>
             <Button variant='outlined' className='tweet-box-button'>Post</Button>
             </div>

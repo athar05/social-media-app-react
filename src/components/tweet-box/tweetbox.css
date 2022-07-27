@@ -38,6 +38,7 @@
 
 .tweet-box .tweet-box-button:hover {
     color: var(--primary);
+    border: none;
 }
 
 .tweet-box-utilities {

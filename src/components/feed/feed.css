@@ -13,5 +13,5 @@
 /* Hiding scroll bar for IE, Edge and Firefox  */
 .feed {
     -ms-overflow-style: none; 
-    scrollbar-width: none;
+    scrollbar-width: none   ;
 }

@@ -8,7 +8,7 @@ const Home = () => {
       <div className='navbar'>
       <Navbar/>
       </div>
-      <section className='home-body'>
+      <section className='home-container'>
       <Sidebar/>
       <Feed/>
       </section>
