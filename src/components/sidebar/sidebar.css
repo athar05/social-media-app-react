@@ -1,3 +1,11 @@
+.sidebar {
+    border-right: 1px solid var(--border-color);
+    padding: 0 2rem;
+    margin-top: 2rem;   
+    flex: 0.3;
+    min-height: 250px;
+}
+
 .sidebar-option {
     display: flex;
     align-items: center;
@@ -30,6 +38,7 @@
     border: none;
     font-weight: 600;
     border-radius: 30px;
+    margin-top: 20px;
 }
 
 .sidebar .sidebar-button:hover {

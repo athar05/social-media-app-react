@@ -5,7 +5,9 @@ import Navbar from "../components/Navbar"
 const Home = () => {
   return (
     <Fragment>
+      <div className='navbar'>
       <Navbar/>
+      </div>
       <section className='home-body'>
       <Sidebar/>
       <Feed/>

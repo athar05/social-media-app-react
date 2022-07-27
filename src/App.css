@@ -1,10 +1,11 @@
 :root {
-  --primary: #1976D2; 
+  --primary: #1D9BF0; 
   --white: #fff;
   --black: black;
   --danger: #e74c3c;
   --success: #2ecc71;
   --hover: #e8f5fe;
+  --border-color: #bdc3c7;
 }
 
 * {
@@ -126,8 +127,9 @@ body {
 
 /* Navbar */
 
-.navbar {
+#navbar {
   width: 100%;
+  background-color: var(--primary);
 }
 
 .links {
@@ -199,6 +201,11 @@ Button {
 
 .home-body {
   display: flex;
+  height: 100vh;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 10px
 }
 
 /* Media Queries */

@@ -20,7 +20,7 @@ const Navbar = () => {
   }
 
   return (
-    <AppBar position='static' className='navbar'>
+    <AppBar position='static' id='navbar'>
         <Toolbar>
             <IconButton size="large" edge="start" color="inherit" aria-label='logo'> 
             {

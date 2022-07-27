@@ -1,0 +1,69 @@
+.tweet-box {
+    padding: 0 10px 10px 0;
+    border-bottom: 8px solid var(--border-color);
+}
+
+.tweet-box-input{
+    display: flex;
+    padding: 20px;
+}
+
+.tweet-box > form {
+    display: flex;
+    flex-direction: column;
+}
+
+.tweet-box-input > input {
+    flex: 1; 
+    padding-left: 20px;
+    border: none;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.tweet-box-input > input:focus{
+    outline: none;
+}
+
+.tweet-box .tweet-box-button {
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    font-weight: 600;
+    border-radius: 30px;
+    width: 80px;
+    margin-top: 20px;
+    margin-left: auto;
+}
+
+.tweet-box .tweet-box-button:hover {
+    color: var(--primary);
+}
+
+.tweet-box-utilities {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+
+.tweet-box-utilities-left {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+.tweet-box-utilities-left > .MuiSvgIcon-root {
+    margin:0 5px ;
+    color: var(--primary);
+}
+
+.tweet-box-utilities-left > .MuiSvgIcon-root:hover {
+    background-color: var(--hover);
+    border-radius: 30rem;
+    color: var(--primary);
+    transition: color 1ms ease-out;
+    cursor: pointer;
+}
