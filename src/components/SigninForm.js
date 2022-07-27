@@ -93,8 +93,9 @@ const SigninForm = () => {
         } else {
             signInUser(user)
             .then(({user, token})=> dispatch(signIn({user,token})))
+            .then(()=> setTimeout(()=> console.log("hello"), 2000))
             .then(()=> dispatch(setAlert("Sign Up Successful", "success", id)))
-            .then(()=> setTimeout(()=> dispatch(removeAlert(id))))
+            .then(()=> setTimeout(()=> dispatch(removeAlert(id)), 2000))
             .then(()=> 	navigate("/home", { replace: true }))
             .catch((e)=> {
           if (e.response.status === 422) {

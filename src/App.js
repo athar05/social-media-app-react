@@ -9,6 +9,6 @@ const App=() =>
  <Fragment>
   <PageRoutes/>
   </Fragment>
- </Router>
+</Router>
 
 export default App;
