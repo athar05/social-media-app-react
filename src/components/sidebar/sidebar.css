@@ -50,3 +50,37 @@
     color: var(--primary);
 }
 
+@media only screen and (max-width: 600px) {
+    .sidebar{
+        width: 20%;
+        padding: 0 20px 0 5px;
+        margin: 0 20px 0 0 ;
+    }
+
+    .sidebar-option {
+        padding: 5px 5px;
+    }
+
+    .sidebar-option > Icon {
+        margin-right: 0;
+    }
+
+    .sidebar-option > h2 {
+        display: none;
+    }
+
+    .sidebar .sidebar-option:hover {
+        background-color: var(--hover);
+        border-radius: 30px;
+        color: var(--primary);
+        transition: color 1ms ease-out;
+    }
+
+    .sidebar > Button {
+        padding: 20px 20px;
+    }
+
+    .sidebar > Button > div {
+        display: none;
+    }
+  }

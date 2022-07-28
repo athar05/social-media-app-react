@@ -219,4 +219,10 @@ Button {
   .form-wrapper {
     width: 70%;
   }
+
+  @media only screen and (max-width: 600px) {
+    .home-container {
+      padding: 10px 0;
+    }
+  }
 }

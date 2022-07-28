@@ -5,6 +5,7 @@ import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { Button } from '@mui/material';
+import CreateIcon from '@mui/icons-material/Create';
 import "./sidebar.css"
 
 const Sidebar = () => {
@@ -14,7 +15,7 @@ const Sidebar = () => {
         <SidebarOptions Icon={ExploreOutlinedIcon} text="Explore" />
         <SidebarOptions Icon={BookmarkBorderIcon} text="Bookmarks" />
         <SidebarOptions Icon={AccountCircleOutlinedIcon} text="Profile" />
-        <Button className='sidebar-button' variant='outlined' fullWidth>Create Post</Button>
+        <Button className='sidebar-button' variant='outlined' fullWidth><CreateIcon/><div class="text">Create Post</div></Button>
     </section>
   )
 }

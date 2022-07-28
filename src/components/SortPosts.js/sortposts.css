@@ -1,0 +1,15 @@
+.sort-posts {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 2px;
+    align-items: center;
+    color: var(--primary);
+}
+
+.sort-posts > div> Button {
+    height: 2.5rem;
+    color: var(--primary);
+    background-color: var(--hover);
+    border: none;
+}
