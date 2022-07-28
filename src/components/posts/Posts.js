@@ -1,13 +1,13 @@
 import { Avatar } from '@mui/material';
 import React from 'react';
 import "./posts.css"
-import VerifiedIcon from '@mui/icons-material/Verified';
-import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
+import UserComments from './UserComments';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
-import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
+// import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
+// import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
+import {Button} from '@mui/material';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 
 const Posts = () => {
@@ -17,30 +17,35 @@ const Posts = () => {
             <Avatar/>
         </div>
         <div className='posts-body'> 
-            <div className='posts-header'>
+            <div className='posts-header p'>
                 <div className='posts-header-text'>
-                    <h3>Athar Shakeel</h3>
+                    <h4>Athar Shakeel</h4>
                  <span className='posts-header-username'><h4>@athar05 ▪</h4></span>
-                 <span className='posts-header-timestamp'><h4>10s Ago</h4></span>
+                 <span className='posts-header-timestamp'><h5>10s Ago</h5></span>
                 </div>
                 <div className='posts-description'>
-                    <p>Helllooooooo</p>
+                    <p>Helllooooooo I am in Dubai curretsssssssssssssssssssssssssssssssssss</p>
                 </div>
             </div>
             <img src='https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif' alt='gif'/>
             <div className='posts-footer'> 
-            <div>
-            <ChatBubbleOutlineOutlinedIcon fontSize='small'/>
+            <div id='post-like'>
+            <FavoriteBorderOutlinedIcon fontSize='small'/> <span>58 </span>
             </div>
             <div>
             <BookmarkBorderOutlinedIcon  fontSize='small'/>
             </div>
-            <div>
-            <FavoriteBorderOutlinedIcon fontSize='small'/>
             </div>
-            <div>
-            <ExpandMoreOutlinedIcon fontSize='small'/>
+            <div className='add-comments'>
+                <Avatar/>
+                <input
+                placeholder='Add comment'
+                type= "text"
+                />
+                <Button><AddCircleIcon/></Button>
             </div>
+            <div className='user-comments-body'>
+                <UserComments/>
             </div>
         </div>
         

@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import Sidebar from '../components/sidebar/Sidebar';
 import Feed from '../components/feed/Feed';
 import Navbar from "../components/Navbar"
-import Widgets from '../components/widgets/Widgets';
+import Follow from '../components/follow/Follow';
 const Home = () => {
   return (
     <Fragment>
@@ -12,7 +12,7 @@ const Home = () => {
       <section className='home-container'>
       <Sidebar/>
       <Feed/>
-      <Widgets/>
+      <Follow/>
       </section>
     </Fragment>
   )

@@ -11,9 +11,10 @@ const TweetBox = () => {
         <form>
             <div className='tweet-box-input'>
                 <Avatar src='../images/user.jpg'/>
-                <input
+                <textarea
                 placeholder='Create a post...'
                 type='text'
+                maxlength="250"
                 />
             </div>
             <div className='tweet-box-utilities'>

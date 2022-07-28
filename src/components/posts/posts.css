@@ -2,16 +2,24 @@
     display: flex;
     align-items: flex-start;
     border-bottom: 1px solid var(--border-color);
-    padding: 10px 10px;
+    padding: 0.2rem 0.2rem;
+    transition: ease-out 8ms;
+    width: min-content;
+}
+
+.posts:hover {
+    cursor: pointer;
+    background-color: #e9efef;
 }
 
 .posts-body {
     flex: 1;
-    padding: 10px;
+    padding: 0.5rem 0.5rem;
+    /* border: 1px solid black; */
 }
 
 .posts-avatar {
-    padding: 15px;
+    padding: 1rem 0 0 1rem;
 }
 
 .posts-body > img {
@@ -22,32 +30,46 @@
     font-weight: 600;
     font-size: 12px;
     color: gray;
-    margin-left: 5px;
+    margin-left: 0.25rem;
 }
 .posts-header-timestamp {
     font-size: 12px;
+    font-weight: 100;
     color: var(--black);
-    margin-left: 5px;
+    margin-left: 0.25rem;
 }
 
 .posts-footer {
     display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.25rem;
 }
 
 .posts-footer > div {
     color: var(--primary);
-    font-size: 20px;
+    font-size: 0.85rem;
+    transition: ease-out 5ms;
+    background-color: transparent;
 }
 
-.posts-footer > div:hover {
-    background-color: var(--hover);
-    border-radius: 30rem;
+.posts-body .posts-footer > div {
     color: var(--primary);
     transition: color 1ms ease-out;
     cursor: pointer;
 }
+
+.posts-body .posts-footer #post-like {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 2.3rem;
+}
+
+.posts-body .posts-footer #post-like:hover {
+    color: var(--red) !important;
+}
+
 
 .posts-header-text {
     display: flex;
@@ -55,11 +77,62 @@
 }
 
 .post__header-text > h3 {
-    font-size: 15px;
-    margin-bottom: 5px;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
   }
 
 .posts-description {
-    margin-bottom: 10px;
-    font-size: 15px;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.add-comments {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.8rem;
+    background-color: var(--background-color);
+    padding: 0.15rem 0.25rem;
+}
+
+.add-comments > input {
+    border: none;
+    flex: 2;
+    margin: 0.25rem 0.6rem;
+    line-height: 1.5rem;
+    background-color: var(--background-color);
+    /* align-content: center; */
+}
+
+.add-comments > input:focus {
+    outline: none;
+    line-height: 2rem;
+}
+
+.posts-body .add-comments > Button {
+    height: 22px;
+    color: var(--primary);
+    background-color: transparent;  
+    min-width: 0rem;
+}
+
+.posts .add-comments > .MuiAvatar-root, .user-comments .user-comments-details > .MuiAvatar-root {
+    height: 20px;
+    width: 20px;
+}
+
+.user-comments {
+    display: flex;
+    /* align-items: center; */
+    border: 1px solid var(--border-color);
+    border-radius: 0.6rem;
+    padding: 0.2rem;
+}
+
+.user-comments .user-comments-description {
+    margin-left: 0.25rem;
+}
+
+.user-comments .user-comments-description > p {
+    font-size: 0.7rem;
 }
