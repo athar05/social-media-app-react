@@ -1,7 +1,7 @@
 import React from 'react';
 import "./feed.css";
 import TweetBox from '../tweet-box/TweetBox';
-import Posts from '../posts/Posts';
+import Post from '../posts/Post';
 import SortPosts from '../SortPosts.js/SortPosts';
 
 const Feed = () => {
@@ -9,19 +9,7 @@ const Feed = () => {
     <div className='feed'>
       <TweetBox />
       <SortPosts/>
-      <Posts/>
-      <Posts/>
-      <Posts/>
-      <Posts/>
-      <Posts/>
-      <Posts/>
-      <Posts/>
-      <Posts/>
-      <Posts/>
-      <Posts/>
-      <Posts/>
-      <Posts/>
-      <Posts/>
+      <Post/>
     </div>
   )
 }

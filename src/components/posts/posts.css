@@ -4,7 +4,6 @@
     border-bottom: 1px solid var(--border-color);
     padding: 0.2rem 0.2rem;
     transition: ease-out 8ms;
-    width: min-content;
 }
 
 .posts:hover {
@@ -15,6 +14,7 @@
 .posts-body {
     flex: 1;
     padding: 0.5rem 0.5rem;
+    width: min-content;
     /* border: 1px solid black; */
 }
 

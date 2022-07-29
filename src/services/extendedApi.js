@@ -1,15 +1,17 @@
-import { authApi } from "./authApi";
+import { mockApiSlice } from "./mockApiSlice";
 
-export const extendedApi = authApi.injectEndpoints({
+export const extendedApi = mockApiSlice.injectEndpoints({
     endpoints: (builder)=> ({
-        registerUser: builder.mutation({
-            query: contactInfo => ({
-                url: "signup",
-                method: "POST",
-                body: contactInfo
-            })
-        })
+        getPosts: builder.query({
+            query: () => "/posts",
+            providesTags: ['POST'],
+        }),
+         //for getting the comments
+    getComments: builder.query({
+        query: (postId)=> `/comments/${postId}`,
+        providesTags: ['COMMENT'],
+    })
     })
 })
 
-export const {useRegisterUserMutation} = extendedApi;
+export const {useGetPostsQuery, useGetCommentsQuery} = extendedApi;

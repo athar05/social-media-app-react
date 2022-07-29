@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'; 
 
-export const mockApi = createApi({
+export const mockApiSlice = createApi({
     reducerPath: "mockApi", 
     baseQuery: fetchBaseQuery({
         baseUrl: "/api", 

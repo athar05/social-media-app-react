@@ -14,7 +14,7 @@ const TweetBox = () => {
                 <textarea
                 placeholder='Create a post...'
                 type='text'
-                maxlength="250"
+                maxLength="250"
                 />
             </div>
             <div className='tweet-box-utilities'>

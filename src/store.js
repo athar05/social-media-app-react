@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { mockApi } from "./services/mockApi";
+import { mockApiSlice } from "./services/mockApiSlice";
 import authReducer from "./features/auth/authSlice";
 import alertReducer from "./features/auth/alertSlice";
 
 export const store = configureStore({
     reducer: {
-        [mockApi.reducerPath]: mockApi.reducer,
+        [mockApiSlice.reducerPath]: mockApiSlice.reducer,
         auth: authReducer,
         alert: alertReducer
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(mockApi.middleware)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(mockApiSlice.middleware)
 })

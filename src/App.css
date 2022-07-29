@@ -224,5 +224,12 @@ Button {
     .home-container {
       padding: 10px 0;
     }
+
+    .home-container > Sidebar {
+      min-width: 20%;
+    }
+    .home-container> Feed {
+      min-width: 80%
+    }
   }
 }

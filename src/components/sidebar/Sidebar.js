@@ -15,7 +15,7 @@ const Sidebar = () => {
         <SidebarOptions Icon={ExploreOutlinedIcon} text="Explore" />
         <SidebarOptions Icon={BookmarkBorderIcon} text="Bookmarks" />
         <SidebarOptions Icon={AccountCircleOutlinedIcon} text="Profile" />
-        <Button className='sidebar-button' variant='outlined' fullWidth><CreateIcon/><div class="text">Create Post</div></Button>
+        <Button className='sidebar-button' variant='outlined' fullWidth><CreateIcon/><div className="text">Create Post</div></Button>
     </section>
   )
 }
