@@ -10,8 +10,12 @@ export const extendedApi = mockApiSlice.injectEndpoints({
     getComments: builder.query({
         query: (postId)=> `/comments/${postId}`,
         providesTags: ['COMMENT'],
-    })
+    }),
+    getUsers: builder.query({
+        query: ()=> "/users",
+        providesTags: ['USER']
+    }) 
     })
 })
 
-export const {useGetPostsQuery, useGetCommentsQuery} = extendedApi;
+export const {useGetPostsQuery, useGetCommentsQuery, useGetUsersQuery} = extendedApi;

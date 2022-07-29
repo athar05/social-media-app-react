@@ -1,7 +1,7 @@
 import React from 'react'
 import "./follow.css";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import FollowUsersCard from '../FollowUsersCard';
+import FollowUsersCard from './FollowUsersCard';
 
 const Follow = () => {
   return (

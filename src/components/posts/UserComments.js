@@ -3,14 +3,18 @@ import { Avatar } from '@mui/material';
 import { useGetCommentsQuery } from '../../services/extendedApi';
 
 const UserComments = ({id}) => {
-  console.log(id)
   const { data, error, isLoading, isSuccess } = useGetCommentsQuery(id);
-  console.log(data, error)
   const comments = data?.comments
+  
   return (
     <Fragment>
       {
-        comments? ( comments?.map(comment=> (
+        isLoading && <h5 className='text-center p'>Loading comments....</h5>
+      }
+      {error && <h5 className='text-center p'>Error in loading comments</h5>}
+      {isSuccess?
+      (
+         comments?.map(comment=> (
           <div className='user-comments m'>
           <div className='user-comments-details'> 
           <Avatar/>    
@@ -21,12 +25,11 @@ const UserComments = ({id}) => {
           </div>
       </div>
         ))
-         
-        ) 
-        : 
-        (
-          <h6 className='text-center p'>No Comments Available</h6>
-        )
+      ) 
+      :
+       (
+      !error && <h5> No one has commented yet</h5>
+       )
       }
     </Fragment>
     
