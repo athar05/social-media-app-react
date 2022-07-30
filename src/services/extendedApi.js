@@ -7,12 +7,13 @@ export const extendedApi = mockApiSlice.injectEndpoints({
             query: () => "/posts",
             providesTags: ['POST'],
         }),
-        createPost: builder.mutation({
+        addPost: builder.mutation({
             query: (post) => ({
                 url: "/posts",
                 method: "POST", 
                 body: {postData: post}
-            })
+            }), 
+            invalidatesTags: ['POST'],
         }),
          //for getting the comments
     getComments: builder.query({
@@ -27,4 +28,4 @@ export const extendedApi = mockApiSlice.injectEndpoints({
     })
 })
 
-export const {useGetPostsQuery, useCreatePostMutation, useGetCommentsQuery, useGetUsersQuery} = extendedApi;
+export const {useGetPostsQuery, useAddPostMutation, useGetCommentsQuery, useGetUsersQuery} = extendedApi;

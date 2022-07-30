@@ -15,8 +15,8 @@ import { CircularProgress } from "@mui/material";
 const Post = () => {
 
     const { data, error, isLoading, isSuccess } = useGetPostsQuery();
-    console.log(data?.posts[0].likes.likeCount)
     const userPosts = data?.posts
+    console.log(userPosts)
   return (
     <Fragment>
         {

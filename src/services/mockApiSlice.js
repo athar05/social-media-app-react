@@ -5,7 +5,7 @@ export const mockApiSlice = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: "/api", 
         prepareHeaders: (headers) => {
-            const token = JSON.parse(localStorage.getItem("token"))
+            const token = JSON.parse(localStorage.getItem("auth_token"))
             if (token) {
                 headers.set('authorization', token)
             }
