@@ -1,13 +1,13 @@
 import React from 'react';
 import "./feed.css";
-import TweetBox from '../tweet-box/TweetBox';
+import CreatePost from '../create-post/CreatePost';
 import Post from '../posts/Post';
-import SortPosts from '../SortPosts.js/SortPosts';
+import SortPosts from '../sort-posts/SortPosts';
 
 const Feed = () => {
   return (
     <div className='feed'>
-      <TweetBox />
+      <CreatePost />
       <SortPosts/>
       <Post/>
     </div>

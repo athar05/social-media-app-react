@@ -1,5 +1,5 @@
 import React from 'react';
-import "./tweetbox.css"
+import "./createpost.css"
 import { Avatar, Input, Button } from '@mui/material';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
