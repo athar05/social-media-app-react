@@ -15,7 +15,7 @@ const UserComments = ({id}) => {
       {isSuccess?
       (
          comments?.map(comment=> (
-          <div className='user-comments m'>
+          <div className='user-comments m' key={comment._id}>
           <div className='user-comments-details'> 
           <Avatar/>    
           </div>

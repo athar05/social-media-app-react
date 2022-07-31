@@ -1,7 +1,7 @@
 import { createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    token: localStorage.getItem("auth_token"), 
+    token: localStorage.getItem("auth_token") ? localStorage.getItem("auth_token") : null, 
     isAuthenticated:  true, //change it to flase
     user: null
 }

@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 const PageRoutes = () => {
   // const loginState = localStorage.getItem("auth_token")
   const loginState= useSelector((state)=> state.auth.isAuthenticated) === true? localStorage.getItem("auth_token") : null; 
-  console.log(loginState)
+  // console.log(loginState)
   // console.log(loginState2)
   return (
     <Routes>

@@ -33,23 +33,24 @@ const SigninForm = () => {
 
     const signInUser = async (userInfo) => {
       const {data}= await axios.post("api/auth/login", userInfo);
-      console.log(data)
-      const {createdUser, encodedToken} = await data;
-      localStorage.setItem('user', JSON.stringify(createdUser));
+      // console.log(data)
+      const {foundUser, encodedToken} = await data;
+      // console.log(foundUser)
+      localStorage.setItem('user', JSON.stringify(foundUser));
       localStorage.setItem('auth_token', JSON.stringify(encodedToken))
-      return { user: createdUser, token: encodedToken };
+      return { user: foundUser, token: encodedToken };
     }
 
     //function to send a guest sign in request to a server
     const guestLoginHandler = (e) => {
         e.preventDefault();
 
-        const user = {
+        const userInfo = {
             username: "adarshbalika",
             password: "adarshBalika123"
         }
-        signInUser(user)
-        .then(({user, token})=> dispatch(signIn({user,token})))
+        signInUser(userInfo)
+        .then(({user, token})=> dispatch(signIn({user, token})))
         .then(()=> dispatch(setAlert("Sign Up Successful", "success", id)))
         .then(()=> setTimeout(()=> dispatch(removeAlert(id))))
         .then(()=> 	navigate("/home", { replace: true }))
@@ -74,7 +75,7 @@ const SigninForm = () => {
 
         //form validation 
 
-        const user = {
+        const userInfo = {
             username: enteredUsername,
             password: enteredPassword
         }
@@ -91,7 +92,7 @@ const SigninForm = () => {
                 dispatch(removeAlert(id))
             }, 5000);   
         } else {
-            signInUser(user)
+            signInUser(userInfo)
             .then(({user, token})=> dispatch(signIn({user,token})))
             .then(()=> dispatch(setAlert("Sign Up Successful", "success", id)))
             .then(()=> setTimeout(()=> dispatch(removeAlert(id)), 2000))

@@ -1,13 +1,18 @@
 import React, {useRef} from 'react';
 import "./createpost.css"
-import { Avatar, Input, Button } from '@mui/material';
+import { Avatar, Button } from '@mui/material';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
 import GifBoxOutlinedIcon from '@mui/icons-material/GifBoxOutlined';
 import { useAddPostMutation } from '../../services/extendedApi';
+import { useSelector } from 'react-redux';
 
 const TweetBox = () => {
 
+    const userInfo = localStorage.getItem("user")
+    console.log(userInfo)
+    const {firstName, lastName} = JSON.parse(userInfo);
+    console.log(firstName, lastName)
     const postTextInputRef = useRef();
     
     const [addPost] = useAddPostMutation();
@@ -18,7 +23,10 @@ const TweetBox = () => {
         console.log(postText)
         if (postText) {
             let newPost= {
-                content: postText
+                comments: [],
+                content: postText,
+                firstname: firstName,
+                lastname: lastName
             }
             
        await addPost(newPost)

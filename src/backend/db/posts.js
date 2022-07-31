@@ -22,24 +22,24 @@ export const posts = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     comments: [
-      {
-        _id: uuid(),
-        username: "shubhamsoni",
-        text: "Interesting",
-        votes: {
-          upvotedBy: [],
-          downvotedBy: [],
-        },
-      },
-      {
-        _id: uuid(),
-        username: "sohamshah",
-        text: "Wow!",
-        votes: {
-          upvotedBy: [],
-          downvotedBy: [],
-        },
-      },
+      // {
+      //   _id: uuid(),
+      //   username: "shubhamsoni",
+      //   text: "Interesting",
+      //   votes: {
+      //     upvotedBy: [],
+      //     downvotedBy: [],
+      //   },
+      // },
+      // {
+      //   _id: uuid(),
+      //   username: "sohamshah",
+      //   text: "Wow!",
+      //   votes: {
+      //     upvotedBy: [],
+      //     downvotedBy: [],
+      //   },
+      // },
     ],
   },
   {

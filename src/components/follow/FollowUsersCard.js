@@ -2,11 +2,8 @@ import React, {Fragment} from 'react';
 import { Avatar, Button } from '@mui/material';
 
 const FollowUsersCard = ({data, error, isLoading, isSuccess}) => {
-  console.log(data?.users)
   const users = data?.users;
-  console.log(users?.length)
   const slicedUsers = users?.slice(0,5);
-  console.log(slicedUsers)
   return (
     <Fragment>
       {
