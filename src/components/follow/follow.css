@@ -16,7 +16,7 @@
 
 .follow-input > input {
     border: none;
-    background-color: var(--background-colo);
+    background-color: var(--background-color);
     margin-left: 5px;
     width: 90%;
     line-height: 25px;

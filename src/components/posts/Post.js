@@ -1,15 +1,14 @@
-import { Avatar } from '@mui/material';
-import React, {Fragment} from 'react';
+import React, {Fragment, useRef} from 'react';
+import {Avatar} from "@mui/material"
 import "./posts.css"
 import UserComments from './UserComments';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 // import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-// import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
-import {Button} from '@mui/material';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+// import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined'
 import { useGetPostsQuery } from '../../services/extendedApi';
 import { CircularProgress } from "@mui/material";
+import AddComment from './AddComment';
 
 
 const Post = () => {
@@ -17,6 +16,7 @@ const Post = () => {
     const { data, error, isLoading, isSuccess } = useGetPostsQuery();
     const userPosts = data?.posts
     console.log(userPosts)
+
   return (
     <Fragment>
         {
@@ -29,7 +29,7 @@ const Post = () => {
         }
         { isSuccess &&
             userPosts?.map(post=> (
-                <div className='posts' key={post?.id} >
+                <div className='posts' key={post?._id} >
                 <div className='posts-avatar'>
                     <Avatar/>
                 </div>
@@ -53,16 +53,11 @@ const Post = () => {
                     <BookmarkBorderOutlinedIcon  fontSize='small'/>
                     </div>
                     </div>
-                    <div className='add-comments'>
-                        <Avatar/>
-                        <input
-                        placeholder='Add comment'
-                        type= "text"
-                        />
-                        <Button><AddCircleIcon/></Button>
+                    <div>
+                        <AddComment id={post?._id}/>
                     </div>
                     <div className='user-comments-body'>
-                        <UserComments id={post._id}/>
+                        <UserComments id={post?._id}/>
                     </div>
                 </div>
             </div>
