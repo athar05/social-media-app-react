@@ -73,8 +73,8 @@
     color: var(--red);
 }
 
-.active-button {
-    color: var(--red);
+.posts-body .posts-footer .active-button {
+    color: var(--red) !important;
     /* background-color: var(--red) !important; */
     
 }

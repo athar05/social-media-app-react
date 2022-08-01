@@ -66,19 +66,18 @@ const Post =  () => {
                     </div>
                     {/* <img src='https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif' alt='gif'/> */}
                     <div className='posts-footer'> 
-                    <button id='post-like' onClick={()=>addLikeHandler(post._id)}>
                         {
                             post.likes.likedBy.find((item)=> item._id === currentUserId)=== undefined? (
-                                 <div>
-                                    <FavoriteBorderOutlinedIcon fontSize='small' id='post-like'/> <span>{post.likes.likeCount}</span>  
-                                 </div>
+                                     <button id='post-like' onClick={()=>addLikeHandler(post._id)}>
+                                    <FavoriteBorderOutlinedIcon fontSize='small'/> <span>{post.likes.likeCount}</span>  
+                                    </button> 
                             ) : (
-                                <div>
-                                   <FavoriteOutlinedIcon fontSize='small' id='post-like' className='active-button'/> <span>{post.likes.likeCount}</span>  
-                                </div>
+                                <button id='post-like' className='active-button'>
+                                   <FavoriteOutlinedIcon fontSize='small'/> <span>{post.likes.likeCount}</span>  
+                                   </button> 
                             )
                         }    
-                    </button> 
+
                     <button>
                     <BookmarkBorderOutlinedIcon  fontSize='small'/>
                     </button>
