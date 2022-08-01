@@ -53,7 +53,7 @@ export const posts = [
     },
     firstname: "Athar", 
     lastname: "Shakeel",
-    username: "shubhamsoni",
+    username: "athar05",
     createdAt: formatDate(),
     updatedAt: formatDate(),
 

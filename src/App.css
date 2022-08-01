@@ -164,21 +164,6 @@ body {
   background-color: white !important;
   color: var(--primary) !important;
 }
-
-.modal{
-  position: relative;
-}
-
-.modal-container {
-  position: absolute;
-  top: 35%;
-  left: 35%;
-  transform: 'translate(-50%, -50%)';
-  width: 30rem;
-  background-color: var(--white);
-  padding: 2rem 2rem;
-}
-
 /* Landing Page */
 
 .landing, .sign-up, .sign-in, .sign-out {
@@ -219,6 +204,12 @@ Button {
 }
 
 /* Alerts */
+
+.alerts {
+  position: fixed;
+  top: 10%;
+  opacity: 0.9;
+}
 
 .alert-danger {
   background-color: var(--danger);

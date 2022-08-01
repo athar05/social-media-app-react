@@ -3,12 +3,14 @@ import "./feed.css";
 import CreatePost from '../create-post/CreatePost';
 import Post from '../posts/Post';
 import SortPosts from '../sort-posts/SortPosts';
+import Alerts from '../Alerts';
 
 const Feed = () => {
   return (
     <div className='feed'>
       <CreatePost />
       <SortPosts/>
+      <Alerts/>
       <Post/>
     </div>
   )

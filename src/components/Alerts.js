@@ -7,7 +7,7 @@ const Alerts = () => {
 if (alertStatus!== null && alertStatus.length>0) {
     return (
             alertStatus.map(alert=> (
-                <Alert severity={`${alert.alertType}`} key={alert.id}>{alert.message}</Alert>
+                <Alert className='alerts' severity={`${alert.alertType}`} key={alert.id}>{alert.message}</Alert>
             ))
         )
     }

@@ -11,19 +11,31 @@ import { CircularProgress } from "@mui/material";
 import AddComment from './AddComment';
 import { useAddLikeMutation } from '../../services/extendedApi';
 import { useGetParticularUserQuery } from '../../services/extendedApi';
+import { useGetBookmarksQuery } from '../../services/extendedApi';
+import { useAddBookmarkMutation } from '../../services/extendedApi';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ModalComponent from '../modal/ModalComponent';
+import { useDispatch } from 'react-redux';
+import { setAlert, removeAlert } from '../../features/auth/alertSlice';
+import { nanoid } from '@reduxjs/toolkit';
 
 
 const Post =  () => {
+
+    const bookmarkData = useGetBookmarksQuery()?.data?.bookmarks
+    console.log(bookmarkData)
+
+    const id = nanoid();
+    
+    const dispatch = useDispatch();
 
     //get user
     const {_id:userId} = JSON.parse(localStorage.getItem("user"))
     const {data: userData} = useGetParticularUserQuery(userId);
     const currentUserId = userData?.user?._id
     const currentUsername = userData?.user?.username
-    // console.log(currentUsername, currentUserId)
+    console.log(userData)
 
     //get posts
     const { data, error, isLoading, isSuccess } = useGetPostsQuery();
@@ -37,9 +49,23 @@ const Post =  () => {
        await addLike({postId})
     }
 
+    //functionality to bookmark a post
+    const [addBookmark] = useAddBookmarkMutation();
+    // const [isBookmarked, setIsBookmarked] = useState(false)
     const addBookmarkHandler = async (postId) => {
-        
-    }
+       const {data, error, isLoading, isSuccess}= await addBookmark({postId})
+       if (data) {
+        console.log(data)
+           console.log("hello", bookmarkData)
+           dispatch(setAlert("The post has been bookmarked", "success", id))
+           setTimeout(()=> dispatch(removeAlert(id)), 5000)  
+           console.log("hello", bookmarkData)
+        } else if (error) {
+           dispatch(setAlert(error.data.errors, "error", id))
+           setTimeout(()=> dispatch(removeAlert(id)), 5000) 
+        }
+    }   
+    console.log(bookmarkData)
 
   return (
     <Fragment>
@@ -69,7 +95,6 @@ const Post =  () => {
                             post.username === currentUsername && 
                             <div className='flex-row'>
                                 <Button id='post-edit-icon'><EditIcon fontSize='small'/></Button>
-                                {/* <Button id='post-delete-icon'><DeleteIcon fontSize='small'/></Button> */}
                                 <ModalComponent postId={post?._id} Icon={<DeleteIcon/>} type={"error"} header={"Are You Sure?"} text={"This will permanently delete your post!"} cta={"Delete"} />
                             </div>
                          }

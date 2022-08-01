@@ -43,7 +43,8 @@ export const extendedApi = mockApiSlice.injectEndpoints({
         query: ()=> "/users",
         providesTags: ['USER']
           }),
-       //for getting a particular user 
+       //for getting a particular user \
+
            getParticularUser: builder.query({
         query: (userId) => ({
             url: `/users/${userId}`
@@ -56,8 +57,23 @@ export const extendedApi = mockApiSlice.injectEndpoints({
             method: "POST"
         }),
         invalidatesTags: ['POST'],
-            })
+            }),
+            //for getting all the bookmarked posts 
+            getBookmarks: builder.query({
+                query: ()=> ({
+                    url: '/users/bookmark',
+                    providesTags: ['USER'],
+                })
+            }),
+            //for bookmarking a post
+            addBookmark: builder.mutation({
+                query: ({postId}) => ({
+                    url: `/users/bookmark/${postId}`,
+                    method: "POST"
+                }),
+                invalidatesTags: ["USER"]
+            }),
       })
 })
 
-export const {useGetPostsQuery, useAddPostMutation, useGetCommentsQuery, useAddCommentMutation, useAddLikeMutation, useGetUsersQuery, useGetParticularUserQuery, useDeletePostMutation} = extendedApi;
+export const {useGetPostsQuery, useAddPostMutation, useGetCommentsQuery, useAddCommentMutation, useAddLikeMutation, useGetUsersQuery, useGetParticularUserQuery, useDeletePostMutation, useGetBookmarksQuery, useAddBookmarkMutation} = extendedApi;

@@ -6,8 +6,14 @@ import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 import "./modal.css"
 import { useDeletePostMutation } from '../../services/extendedApi';
+import { useDispatch } from 'react-redux';
+import { setAlert, removeAlert } from '../../features/auth/alertSlice';
+import { nanoid } from '@reduxjs/toolkit';
 
 const ModalComponent = ({postId, Icon, header, text, type, cta}) => {
+
+  const id = nanoid();
+  const dispatch = useDispatch();
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -17,8 +23,15 @@ const ModalComponent = ({postId, Icon, header, text, type, cta}) => {
 
   const deleteHandler = async (postId) => {
     console.log({postId})
-    deletePost(postId);
+   const {data, error, isLoading, isSuccess}= await deletePost(postId);
     handleClose();
+    if (data) {
+      dispatch(setAlert("Post successfully deleted", "success", id))
+      setTimeout(()=> dispatch(removeAlert(id)), 5000)  
+    } else if (error) {
+      dispatch(setAlert("Post could not be deleted", "error", id))
+    setTimeout(()=> dispatch(removeAlert(id)), 5000)  
+    }
   }
 
 
