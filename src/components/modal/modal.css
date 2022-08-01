@@ -1,0 +1,17 @@
+
+.modal{
+    position: relative;
+  }
+  
+  .modal-container {
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    transform: 'translate(-50%, -50%)';
+    width: 30rem;
+    background-color: var(--white);
+    padding: 2rem 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px ;
+  }
+  

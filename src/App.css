@@ -117,6 +117,10 @@ body {
   margin: 3rem 0;
 }
 
+.flex-row {
+  display: flex;
+}
+
 .flex-row-justified {
   display: flex;
   flex-direction: row;
@@ -126,6 +130,18 @@ body {
 .flex-column {
   display: flex;
   flex-direction: column;
+}
+
+.flex-row-align {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.flex-row-space-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 /* Navbar */
@@ -147,6 +163,20 @@ body {
 .button:hover {
   background-color: white !important;
   color: var(--primary) !important;
+}
+
+.modal{
+  position: relative;
+}
+
+.modal-container {
+  position: absolute;
+  top: 35%;
+  left: 35%;
+  transform: 'translate(-50%, -50%)';
+  width: 30rem;
+  background-color: var(--white);
+  padding: 2rem 2rem;
 }
 
 /* Landing Page */

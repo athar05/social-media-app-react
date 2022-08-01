@@ -82,6 +82,15 @@
 .posts-header-text {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+#post-delete-icon, #post-edit-icon {
+    min-width: 0 !important;
+}
+
+#post-delete-icon {
+    color: var(--red);
 }
 
 .post__header-text > h3 {

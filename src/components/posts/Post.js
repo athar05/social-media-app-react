@@ -1,5 +1,5 @@
 import React, {Fragment, useState} from 'react';
-import {Avatar} from "@mui/material"
+import {Avatar, Button} from "@mui/material"
 import "./posts.css"
 import UserComments from './UserComments';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
@@ -11,6 +11,9 @@ import { CircularProgress } from "@mui/material";
 import AddComment from './AddComment';
 import { useAddLikeMutation } from '../../services/extendedApi';
 import { useGetParticularUserQuery } from '../../services/extendedApi';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import ModalComponent from '../modal/ModalComponent';
 
 
 const Post =  () => {
@@ -19,10 +22,13 @@ const Post =  () => {
     const {_id:userId} = JSON.parse(localStorage.getItem("user"))
     const {data: userData} = useGetParticularUserQuery(userId);
     const currentUserId = userData?.user?._id
+    const currentUsername = userData?.user?.username
+    // console.log(currentUsername, currentUserId)
 
     //get posts
     const { data, error, isLoading, isSuccess } = useGetPostsQuery();
     const userPosts = data?.posts
+    console.log(userPosts)
 
     //functionality to add a like to a post 
     const [addLike] = useAddLikeMutation();
@@ -54,9 +60,19 @@ const Post =  () => {
                 <div className='posts-body'> 
                     <div className='posts-header p'>
                         <div className='posts-header-text'>
-                            <h4>{post.firstname}</h4>
-                         <span className='posts-header-username'><h4>@{post.username} ▪</h4></span>
-                         <span className='posts-header-timestamp'><h5>{post.createdAt}</h5></span>
+                            <div className='flex-row-align'>
+                                <h4>{post.firstname}</h4>
+                               <span className='posts-header-username'><h4>@{post.username}</h4></span>
+                               {/* <span className='posts-header-timestamp'><h5>{post.createdAt}</h5></span> */}
+                            </div>
+                         {
+                            post.username === currentUsername && 
+                            <div className='flex-row'>
+                                <Button id='post-edit-icon'><EditIcon fontSize='small'/></Button>
+                                {/* <Button id='post-delete-icon'><DeleteIcon fontSize='small'/></Button> */}
+                                <ModalComponent postId={post?._id} Icon={<DeleteIcon/>} type={"error"} header={"Are You Sure?"} text={"This will permanently delete your post!"} cta={"Delete"} />
+                            </div>
+                         }
                         </div>
                         <div className='posts-description'>
                             <p>{post.content}</p>
