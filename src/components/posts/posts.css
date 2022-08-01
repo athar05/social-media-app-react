@@ -46,30 +46,38 @@
     margin-bottom: 0.25rem;
 }
 
-.posts-footer > div {
+.posts-footer > button {
     color: var(--primary);
-    font-size: 0.85rem;
+    font-size: 1rem;
     transition: ease-out 5ms;
     background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
 }
 
-.posts-body .posts-footer > div {
+.posts-body .posts-footer > button {
     color: var(--primary);
     transition: color 1ms ease-out;
     cursor: pointer;
 }
 
-.posts-body .posts-footer #post-like {
+.posts-body .posts-footer #post-like{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 2.3rem;
+    width: 2rem;
 }
 
 .posts-body .posts-footer #post-like:hover {
-    color: var(--red) !important;
+    color: var(--red);
 }
 
+.active-button {
+    color: var(--red);
+    /* background-color: var(--red) !important; */
+    
+}
 
 .posts-header-text {
     display: flex;

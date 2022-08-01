@@ -5,7 +5,7 @@ import { useGetCommentsQuery } from '../../services/extendedApi';
 const UserComments = ({id}) => {
   const { data, error, isLoading, isSuccess } = useGetCommentsQuery(id);
   const comments = data?.comments
-  console.log(comments)
+  // console.log(comments) 
   
   return (
     <Fragment>

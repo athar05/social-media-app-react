@@ -33,8 +33,22 @@ export const extendedApi = mockApiSlice.injectEndpoints({
          getUsers: builder.query({
         query: ()=> "/users",
         providesTags: ['USER']
-    }) 
+    }),
+    //for getting a particular user 
+    getParticularUser: builder.query({
+        query: (userId) => ({
+            url: `/users/${userId}`
+        })
+    }),
+    //for adding a like to a post
+    addLike: builder.mutation({
+        query: ({postId}) => ({
+            url: `/posts/like/${postId}`,
+            method: "POST"
+        }),
+        invalidatesTags: ['POST'],
+    })
     })
 })
 
-export const {useGetPostsQuery, useAddPostMutation, useGetCommentsQuery, useAddCommentMutation, useGetUsersQuery} = extendedApi;
+export const {useGetPostsQuery, useAddPostMutation, useGetCommentsQuery, useAddCommentMutation, useAddLikeMutation, useGetUsersQuery, useGetParticularUserQuery} = extendedApi;
