@@ -1,4 +1,4 @@
-import React, {Fragment, useRef} from 'react';
+import React, {Fragment, useState} from 'react';
 import {Avatar} from "@mui/material"
 import "./posts.css"
 import UserComments from './UserComments';
@@ -15,26 +15,24 @@ import { useGetParticularUserQuery } from '../../services/extendedApi';
 
 const Post =  () => {
 
+    //get user
     const {_id:userId} = JSON.parse(localStorage.getItem("user"))
-
     const {data: userData} = useGetParticularUserQuery(userId);
     const currentUserId = userData?.user?._id
-    console.log(currentUserId)
 
+    //get posts
     const { data, error, isLoading, isSuccess } = useGetPostsQuery();
     const userPosts = data?.posts
-    // const likedUsers = data?.posts
-     console.log(userPosts)
-    // const {id, likes} = data?.posts;
-
-
-    const [addLike] = useAddLikeMutation();
 
     //functionality to add a like to a post 
+    const [addLike] = useAddLikeMutation();
 
     const addLikeHandler = async (postId) => {
        await addLike({postId})
-    //    setIsLike((prev)=> !prev)
+    }
+
+    const addBookmarkHandler = async (postId) => {
+        
     }
 
   return (
@@ -51,7 +49,7 @@ const Post =  () => {
             userPosts?.map(post=> (
                 <div className='posts' key={post?._id} >
                 <div className='posts-avatar'>
-                    <Avatar/>
+                    <Avatar alt='user-display-pic' src='../images/adarsh-balika.jpg'/>
                 </div>
                 <div className='posts-body'> 
                     <div className='posts-header p'>
@@ -78,7 +76,7 @@ const Post =  () => {
                             )
                         }    
 
-                    <button>
+                    <button onClick={()=> addBookmarkHandler(post._id)}>
                     <BookmarkBorderOutlinedIcon  fontSize='small'/>
                     </button>
                     </div>
