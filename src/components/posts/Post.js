@@ -103,7 +103,7 @@ const Post =  () => {
                             <p>{post.content}</p>
                         </div>
                     </div>
-                    {/* <img src='https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif' alt='gif'/> */}
+                    <img src='https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif' alt='gif'/>
                     <div className='posts-footer'> 
                         {
                             post.likes.likedBy.find((item)=> item._id === currentUserId)=== undefined? (

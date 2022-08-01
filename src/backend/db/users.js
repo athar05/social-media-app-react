@@ -14,6 +14,9 @@ export const users = [
     password: "adarshBalika123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    followers: [],
+    following: [],
+    bookmarks: [],
   },
   {
     _id: 2,
@@ -23,6 +26,9 @@ export const users = [
     password: "Test123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    followers: [],
+    following: [],
+    bookmarks: [],
   },
   {
     _id: 3,
@@ -32,6 +38,9 @@ export const users = [
     password: "IamJohnDoe123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    followers: [],
+    following: [],
+    bookmarks: [],
   },
   {
     _id: 4,
@@ -41,6 +50,9 @@ export const users = [
     password: "Sarasak123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    followers: [],
+    following: [],
+    bookmarks: [],
   },
   {
     _id: 5,
@@ -50,5 +62,8 @@ export const users = [
     password: "AtharShakeel123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    followers: [],
+    following: [],
+    bookmarks: [],
   }
 ];

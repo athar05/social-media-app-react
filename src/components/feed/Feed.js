@@ -9,8 +9,8 @@ const Feed = () => {
   return (
     <div className='feed'>
       <CreatePost />
-      <SortPosts/>
       <Alerts/>
+      <SortPosts/>
       <Post/>
     </div>
   )
