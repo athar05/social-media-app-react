@@ -9,7 +9,7 @@ export const mockApiSlice = createApi({
             if (token) {
                 headers.set('authorization', token)
             }
-            return headers
+            return headers;
         }
     }), 
 

@@ -24,6 +24,12 @@ export const extendedApi = mockApiSlice.injectEndpoints({
             }),
             invalidatesTags: ['POST'],
         }),
+        //for getting posts by username 
+        getPostsByUsername: builder.query({
+            query: (username) => `/posts/user/${username}`,
+                method: 'GET',
+                providesTags: ['POST'],
+        }),
          //for getting the comments
          getComments: builder.query({
         query: (postId)=> `/comments/${postId}`,
@@ -46,9 +52,8 @@ export const extendedApi = mockApiSlice.injectEndpoints({
        //for getting a particular user \
 
            getParticularUser: builder.query({
-        query: (userId) => ({
-            url: `/users/${userId}`
-        })
+        query: (userId) =>  `/users/${userId}`,
+            providesTags: ['USER']
           }),
             //for adding a like to a post
          addLike: builder.mutation({
@@ -60,10 +65,8 @@ export const extendedApi = mockApiSlice.injectEndpoints({
             }),
             //for getting all the bookmarked posts 
             getBookmarks: builder.query({
-                query: ()=> ({
-                    url: '/users/bookmark',
+                query: ()=>  '/users/bookmark',
                     providesTags: ['USER'],
-                })
             }),
             //for bookmarking a post
             addBookmark: builder.mutation({
@@ -76,4 +79,4 @@ export const extendedApi = mockApiSlice.injectEndpoints({
       })
 })
 
-export const {useGetPostsQuery, useAddPostMutation, useGetCommentsQuery, useAddCommentMutation, useAddLikeMutation, useGetUsersQuery, useGetParticularUserQuery, useDeletePostMutation, useGetBookmarksQuery, useAddBookmarkMutation} = extendedApi;
+export const {useGetPostsQuery, useAddPostMutation, useGetCommentsQuery, useGetPostsByUsernameQuery, useAddCommentMutation, useAddLikeMutation, useGetUsersQuery, useGetParticularUserQuery, useDeletePostMutation, useGetBookmarksQuery, useAddBookmarkMutation} = extendedApi;

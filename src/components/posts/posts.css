@@ -153,3 +153,7 @@
 .user-comments .user-comments-description > p {
     font-size: 0.7rem;
 }
+
+.tweet-box-input .input-edit {
+    background-color: var(--hover-color);
+}

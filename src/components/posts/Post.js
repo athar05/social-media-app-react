@@ -1,5 +1,5 @@
 import React, {Fragment, useState} from 'react';
-import {Avatar, Button} from "@mui/material"
+import {Avatar, Button, Input} from "@mui/material"
 import "./posts.css"
 import UserComments from './UserComments';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
@@ -19,16 +19,21 @@ import ModalComponent from '../modal/ModalComponent';
 import { useDispatch } from 'react-redux';
 import { setAlert, removeAlert } from '../../features/auth/alertSlice';
 import { nanoid } from '@reduxjs/toolkit';
+import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
+import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
+import GifBoxOutlinedIcon from '@mui/icons-material/GifBoxOutlined';
+import { useGetPostsByUsernameQuery } from '../../services/extendedApi';
+import EditPost from './EditPost';
 
 
 const Post =  () => {
 
-    const bookmarkData = useGetBookmarksQuery()?.data?.bookmarks
-    console.log(bookmarkData)
 
     const id = nanoid();
     
     const dispatch = useDispatch();
+
+    const [editPost, setEditPost] =useState(false)
 
     //get user
     const {_id:userId} = JSON.parse(localStorage.getItem("user"))
@@ -36,6 +41,11 @@ const Post =  () => {
     const currentUserId = userData?.user?._id
     const currentUsername = userData?.user?.username
     console.log(userData)
+    const userBookmarks = userData?.user?.bookmarks
+
+    const {data : postByUser} = useGetPostsByUsernameQuery(userData?.user?.username);
+    console.log(postByUser)
+
 
     //get posts
     const { data, error, isLoading, isSuccess } = useGetPostsQuery();
@@ -55,17 +65,27 @@ const Post =  () => {
     const addBookmarkHandler = async (postId) => {
        const {data, error, isLoading, isSuccess}= await addBookmark({postId})
        if (data) {
-        console.log(data)
-           console.log("hello", bookmarkData)
+        console.log("bookmark api response", data)
            dispatch(setAlert("The post has been bookmarked", "success", id))
-           setTimeout(()=> dispatch(removeAlert(id)), 5000)  
-           console.log("hello", bookmarkData)
+           setTimeout(()=> dispatch(removeAlert(id)), 5000)   
         } else if (error) {
            dispatch(setAlert(error.data.errors, "error", id))
            setTimeout(()=> dispatch(removeAlert(id)), 5000) 
         }
     }   
+    const bookmarkData = useGetBookmarksQuery()?.data?.bookmarks
     console.log(bookmarkData)
+
+    // functionality to edit a post 
+
+    const editHandler = () => {
+        setEditPost((prevState)=> !prevState)
+    }
+    
+    const closeText = () => {
+        setEditPost((prevState)=> !prevState)
+        
+    }
 
   return (
     <Fragment>
@@ -94,17 +114,24 @@ const Post =  () => {
                          {
                             post.username === currentUsername && 
                             <div className='flex-row'>
-                                <Button id='post-edit-icon'><EditIcon fontSize='small'/></Button>
+                                <Button id='post-edit-icon' onClick = {editHandler}><EditIcon fontSize='small'/></Button>
                                 <ModalComponent postId={post?._id} Icon={<DeleteIcon/>} type={"error"} header={"Are You Sure?"} text={"This will permanently delete your post!"} cta={"Delete"} />
                             </div>
                          }
                         </div>
-                        <div className='posts-description'>
+                        {
+                            editPost && postByUser.posts?.find((item)=> item._id === post?._id)? (
+                                <EditPost id={post?._id} value = {post.content}/>
+                            ) : (<div className='posts-description'>
                             <p>{post.content}</p>
-                        </div>
+                        </div>)
+                        }
                     </div>
-                    <img src='https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif' alt='gif'/>
-                    <div className='posts-footer'> 
+                    {/* <img src='https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif' alt='gif'/> */}
+
+                    {
+                        !editPost && 
+                        <div className='posts-footer'> 
                         {
                             post.likes.likedBy.find((item)=> item._id === currentUserId)=== undefined? (
                                      <button id='post-like' onClick={()=>addLikeHandler(post._id)}>
@@ -121,9 +148,13 @@ const Post =  () => {
                     <BookmarkBorderOutlinedIcon  fontSize='small'/>
                     </button>
                     </div>
-                    <div>
+                    }
+                    {
+                        !editPost && 
+                        <div>
                         <AddComment id={post?._id}/>
                     </div>
+                    }
                     <div className='user-comments-body'>
                         <UserComments id={post?._id}/>
                     </div>
