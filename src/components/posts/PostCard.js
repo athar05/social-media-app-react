@@ -25,7 +25,6 @@ import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
 import GifBoxOutlinedIcon from '@mui/icons-material/GifBoxOutlined';
 import { useGetPostsByUsernameQuery } from '../../services/extendedApi';
-import EditPost from './EditPost';
 
 const PostCard = ({posts, editPost, setEditPost}) => {
     
@@ -57,7 +56,7 @@ const PostCard = ({posts, editPost, setEditPost}) => {
 
     //functionality to bookmark a post
     const [addBookmark] = useAddBookmarkMutation();
-    // const [isBookmarked, setIsBookmarked] = useState(false)
+
     const addBookmarkHandler = async (postId) => {
        const {data, error, isLoading, isSuccess}= await addBookmark({postId})
        if (data) {
@@ -69,20 +68,6 @@ const PostCard = ({posts, editPost, setEditPost}) => {
            setTimeout(()=> dispatch(removeAlert(id)), 5000) 
         }
     }   
-
-    const bookmarkData = useGetBookmarksQuery()?.data?.bookmarks
-    // console.log(bookmarkData)
-
-    // functionality to edit a post 
-
-    // const editHandler = (id) => {
-    //     <EditPost id={id}/>
-    //     setEditPost(true)
-    // }
-    
-    // const closeText = () => {
-    //     setEditPost((prevState)=> !prevState)   
-    // }
 
   return (
     <Fragment>
@@ -102,9 +87,7 @@ const PostCard = ({posts, editPost, setEditPost}) => {
                      {
                         post.username === currentUsername && 
                         <div className='flex-row'>
-
-                            {/* <Button id='post-edit-icon' onClick = {()=>editHandler(post?._id)}><EditIcon fontSize='small'/></Button> */}
-                            <EditModalComponent post={post} Icon={<EditIcon fontSize='small'/>} type={"success"} header={"Edit Your Post Below?"} cta={"Save Changes"} />
+                            <EditModalComponent post={post} Icon={<EditIcon fontSize='small'/>} type={"success"} header={"Edit Your Post Below"} cta={"Save"} />
                             <DeleteModalComponent postId={post._id} Icon={<DeleteIcon/>} type={"error"} header={"Are You Sure?"} text={"This will permanently delete your post!"} cta={"Delete"} />
                         </div>
                      }

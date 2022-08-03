@@ -11,6 +11,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import { useGetPostsByPostIdQuery } from '../../services/extendedApi';
 import { useEditPostMutation } from '../../services/extendedApi';
 import "../create-post/createpost.css"
+import { Avatar } from '@mui/material';
 
 
 const EditModalComponent = ({post, Icon, header, text, type, cta}) => {
@@ -67,13 +68,21 @@ const EditModalComponent = ({post, Icon, header, text, type, cta}) => {
           <CloseIcon/>
           </Button>
           </div>
+          <div className='tweet-box'>
           <form onSubmit={(e) =>submitHandler(e, {post})}>
+            <div className='tweet-box-input'>
+              <Avatar/>
           <textarea id="modal-modal-description" 
+          autoFocus
+          type='text'
+          maxLength="200"
           defaultValue={post.content}
           ref={editPostInputRef}
           />
-          <Button type='submit' color={type} className='m'>{cta}</Button>
+            </div>
+          <Button type='submit' color={type} variant='outlined' className='tweet-box-button'>{cta} </Button>
           </form>
+          </div>
         </Box>
       </Modal>
     </div>

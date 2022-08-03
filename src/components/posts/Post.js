@@ -1,6 +1,5 @@
 import React, {Fragment, useState} from 'react';
 import PostCard from './PostCard';
-import EditPost from './EditPost';
 import { useGetPostsQuery } from '../../services/extendedApi';
 import { CircularProgress } from '@mui/material';
 
@@ -11,7 +10,7 @@ const Post =  () => {
         const userPosts = data?.posts
         // console.log(userPosts)
 
-        const [editPost, setEditPost] = useState(false)
+        // const [editPost, setEditPost] = useState(false)
 
         // console.log(data?.posts)
   return (
@@ -24,7 +23,9 @@ const Post =  () => {
         {
             error && <h2>There Was An Error Loading Data</h2>
         }
-  { !editPost && (<PostCard posts={userPosts} editPost={editPost} setEditPost={setEditPost}/>)}
+  {isSuccess &&
+ <PostCard posts={userPosts}/> }
+    
     </Fragment>
   )
 }
