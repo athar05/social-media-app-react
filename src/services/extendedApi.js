@@ -99,21 +99,39 @@ export const extendedApi = mockApiSlice.injectEndpoints({
                     method: 'POST'
                 }),
                 invalidatesTags: ["USER"]
-            })
+            }),
+            //for following a user
+            followUser: builder.mutation({
+                query: (followUserId) => ({
+                  url: `/users/follow/${followUserId}`,
+                  method: 'POST',
+                }),
+                invalidatesTags: ['USER'],
+              }),
+              //for unfollowing a user
+              unfollowUser: builder.mutation({
+                query: (followUserId) => ({
+                  url: `/users/unfollow/${followUserId}`,
+                  method: 'POST',
+                }),
+                invalidatesTags: ['USER'],
+              }),
       })
 })
 
 export const {useGetPostsQuery,
-             useAddPostMutation, 
-             useGetCommentsQuery, 
-             useGetPostsByUsernameQuery,
-             useGetPostsByPostIdQuery,
-             useEditPostMutation,
-             useAddCommentMutation, 
-             useAddLikeMutation, 
-             useGetUsersQuery, 
-             useGetParticularUserQuery, 
-             useDeletePostMutation, 
-             useGetBookmarksQuery, 
-             useAddBookmarkMutation,
-            useRemoveBookmarkMutation} = extendedApi;
+              useAddPostMutation, 
+              useGetCommentsQuery, 
+              useGetPostsByUsernameQuery,
+              useGetPostsByPostIdQuery,
+              useEditPostMutation,
+              useAddCommentMutation, 
+              useAddLikeMutation, 
+              useGetUsersQuery, 
+              useGetParticularUserQuery, 
+              useDeletePostMutation, 
+              useGetBookmarksQuery, 
+              useAddBookmarkMutation,
+              useRemoveBookmarkMutation,
+              useFollowUserMutation,
+              useUnfollowUserMutation} = extendedApi;
