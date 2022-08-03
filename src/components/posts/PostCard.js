@@ -16,7 +16,8 @@ import { useGetBookmarksQuery } from '../../services/extendedApi';
 import { useAddBookmarkMutation } from '../../services/extendedApi';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import ModalComponent from '../modal/ModalComponent';
+import DeleteModalComponent from '../modal/DeleteModalComponent';
+import EditModalComponent from '../modal/EditModalComponent';
 import { useDispatch } from 'react-redux';
 import { setAlert, removeAlert } from '../../features/auth/alertSlice';
 import { nanoid } from '@reduxjs/toolkit';
@@ -74,10 +75,10 @@ const PostCard = ({posts, editPost, setEditPost}) => {
 
     // functionality to edit a post 
 
-    const editHandler = (id) => {
-        <EditPost id={id}/>
-        setEditPost(true)
-    }
+    // const editHandler = (id) => {
+    //     <EditPost id={id}/>
+    //     setEditPost(true)
+    // }
     
     // const closeText = () => {
     //     setEditPost((prevState)=> !prevState)   
@@ -101,8 +102,10 @@ const PostCard = ({posts, editPost, setEditPost}) => {
                      {
                         post.username === currentUsername && 
                         <div className='flex-row'>
-                            <Button id='post-edit-icon' onClick = {()=>editHandler(post?._id)}><EditIcon fontSize='small'/></Button>
-                            <ModalComponent postId={post?._id} Icon={<DeleteIcon/>} type={"error"} header={"Are You Sure?"} text={"This will permanently delete your post!"} cta={"Delete"} />
+
+                            {/* <Button id='post-edit-icon' onClick = {()=>editHandler(post?._id)}><EditIcon fontSize='small'/></Button> */}
+                            <EditModalComponent post={post} Icon={<EditIcon fontSize='small'/>} type={"success"} header={"Edit Your Post Below?"} cta={"Save Changes"} />
+                            <DeleteModalComponent postId={post._id} Icon={<DeleteIcon/>} type={"error"} header={"Are You Sure?"} text={"This will permanently delete your post!"} cta={"Delete"} />
                         </div>
                      }
                     </div>

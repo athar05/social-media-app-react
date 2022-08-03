@@ -13,7 +13,7 @@ const Post =  () => {
 
         const [editPost, setEditPost] = useState(false)
 
-        console.log(data?.posts)
+        // console.log(data?.posts)
   return (
     <Fragment>
             {

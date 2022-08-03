@@ -9,8 +9,10 @@ import { useDeletePostMutation } from '../../services/extendedApi';
 import { useDispatch } from 'react-redux';
 import { setAlert, removeAlert } from '../../features/auth/alertSlice';
 import { nanoid } from '@reduxjs/toolkit';
+import { useGetPostsByPostIdQuery } from '../../services/extendedApi';
+import { useEditPostMutation } from '../../services/extendedApi';
 
-const ModalComponent = ({postId, Icon, header, text, type, cta}) => {
+const DeleteModalComponent = ({postId, Icon, header, text, type, cta}) => {
 
   const id = nanoid();
   const dispatch = useDispatch();
@@ -63,4 +65,4 @@ const ModalComponent = ({postId, Icon, header, text, type, cta}) => {
   )
 }
 
-export default ModalComponent
+export default DeleteModalComponent
