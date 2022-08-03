@@ -6,8 +6,8 @@ import UserComments from './UserComments';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-// import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined'
-import { useGetPostsQuery } from '../../services/extendedApi';
+import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined'
+import { useGetPostsQuery, useRemoveBookmarkMutation } from '../../services/extendedApi';
 import { CircularProgress } from "@mui/material";
 import AddComment from './AddComment';
 import { useAddLikeMutation } from '../../services/extendedApi';
@@ -47,6 +47,11 @@ const PostCard = ({posts, editPost, setEditPost}) => {
     // const userPosts = data?.posts
     // console.log(userPosts)
 
+    //getBookmarks 
+
+    const {data: bookmarksData, error, isLoading, isSuccess} = useGetBookmarksQuery();
+    const bookmarks = bookmarksData?.bookmarks;
+
     //functionality to add a like to a post 
     const [addLike] = useAddLikeMutation();
 
@@ -60,7 +65,6 @@ const PostCard = ({posts, editPost, setEditPost}) => {
     const addBookmarkHandler = async (postId) => {
        const {data, error, isLoading, isSuccess}= await addBookmark({postId})
        if (data) {
-        console.log("bookmark api response", data)
            dispatch(setAlert("The post has been bookmarked", "success", id))
            setTimeout(()=> dispatch(removeAlert(id)), 5000)   
         } else if (error) {
@@ -68,6 +72,22 @@ const PostCard = ({posts, editPost, setEditPost}) => {
            setTimeout(()=> dispatch(removeAlert(id)), 5000) 
         }
     }   
+
+    //functionality to remove a post from bookmarks 
+
+    const [removeBookmark] = useRemoveBookmarkMutation();
+
+    const removeBookmarkHandler = async (postId) => {
+        const {data, error, isLoading, isSuccess}= await removeBookmark({postId})
+        console.log(data, error)
+        if (data) {
+               dispatch(setAlert("The post has been removed from bookmarks", "success", id))
+               setTimeout(()=> dispatch(removeAlert(id)), 5000)   
+            } else if (error) {
+               dispatch(setAlert(error.data.errors, "error", id))
+               setTimeout(()=> dispatch(removeAlert(id)), 5000) 
+            }
+    }
 
   return (
     <Fragment>
@@ -111,9 +131,18 @@ const PostCard = ({posts, editPost, setEditPost}) => {
                         )
                     }    
 
+                {bookmarks?.find((item)=> item._id=== post._id) === undefined? ( 
                 <button onClick={()=> addBookmarkHandler(post._id)}>
                 <BookmarkBorderOutlinedIcon  fontSize='small'/>
                 </button>
+                )
+                : 
+                ( 
+                <button onClick={()=> removeBookmarkHandler(post._id)}>
+                <BookmarkOutlinedIcon  fontSize='small'/>
+                </button>
+                )
+                   }
                 </div>
 
                     <div>

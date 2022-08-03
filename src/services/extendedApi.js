@@ -92,6 +92,14 @@ export const extendedApi = mockApiSlice.injectEndpoints({
                 }),
                 invalidatesTags: ["USER"]
             }),
+
+            removeBookmark: builder.mutation({
+                query: ({postId}) => ({
+                    url: `/users/remove-bookmark/${postId}`,
+                    method: 'POST'
+                }),
+                invalidatesTags: ["USER"]
+            })
       })
 })
 
@@ -107,4 +115,5 @@ export const {useGetPostsQuery,
              useGetParticularUserQuery, 
              useDeletePostMutation, 
              useGetBookmarksQuery, 
-             useAddBookmarkMutation} = extendedApi;
+             useAddBookmarkMutation,
+            useRemoveBookmarkMutation} = extendedApi;
