@@ -2,7 +2,6 @@ import React from 'react';
 import "./feed.css";
 import CreatePost from '../create-post/CreatePost';
 import Post from '../posts/Post';
-import SortPosts from '../sort-posts/SortPosts';
 import Alerts from '../Alerts';
 
 const Feed = () => {
@@ -10,7 +9,6 @@ const Feed = () => {
     <div className='feed'>
       <CreatePost />
       <Alerts/>
-      <SortPosts/>
       <Post/>
     </div>
   )

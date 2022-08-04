@@ -24,7 +24,6 @@ const DeleteModalComponent = ({postId, Icon, header, text, type, cta}) => {
   const [deletePost] = useDeletePostMutation();
 
   const deleteHandler = async (postId) => {
-    console.log({postId})
    const {data, error, isLoading, isSuccess}= await deletePost(postId);
     handleClose();
     if (data) {

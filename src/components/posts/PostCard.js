@@ -1,4 +1,4 @@
-import React, {useState, Fragment} from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
 import "./posts.css"
 import {Avatar, Button, Input} from "@mui/material"
 import "./posts.css"
@@ -27,10 +27,10 @@ import GifBoxOutlinedIcon from '@mui/icons-material/GifBoxOutlined';
 import { useGetPostsByUsernameQuery } from '../../services/extendedApi';
 
 const PostCard = ({posts, editPost, setEditPost}) => {
-    
     const id = nanoid();
     
     const dispatch = useDispatch();
+
 
     //get user
     const {_id:userId} = JSON.parse(localStorage.getItem("user"))
@@ -91,8 +91,9 @@ const PostCard = ({posts, editPost, setEditPost}) => {
 
   return (
     <Fragment>
-    { posts?.map(post=> (
-            <div className='posts' key={post?._id} >
+    {/* { [...posts].sort((a,b)=> b?.likes?.likeCount - a?.likes?.likeCount)?.map(post=>( */}
+    {posts?.map(post=>(
+        <div className='posts' key={post?._id} >
             <div className='posts-avatar'>
                 <Avatar alt='user-display-pic' src='../images/adarsh-balika.jpg'/>
             </div>

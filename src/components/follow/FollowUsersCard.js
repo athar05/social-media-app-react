@@ -2,40 +2,58 @@ import React, {Fragment} from 'react';
 import { Avatar, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useFollowUserMutation } from '../../services/extendedApi';
+import RemoveIcon from '@mui/icons-material/Remove';
 import { useUnfollowUserMutation } from '../../services/extendedApi';
+import { setAlert, removeAlert } from '../../features/auth/alertSlice';
 import { useGetPostsByUsernameQuery } from '../../services/extendedApi';
+import { useDispatch } from 'react-redux';
+import { nanoid } from '@reduxjs/toolkit';
 
 const FollowUsersCard = ({data, error, isLoading, isSuccess}) => {
 
+  const id = nanoid();
+  const dispatch = useDispatch();
+
   const userData = JSON.parse(localStorage.getItem('user'))
   const currentUsername = userData.username
-  console.log(currentUsername)
+
 
   const users = data?.users;
   const slicedUsers = users?.slice(0,5);
-  console.log(users)
 
-//   const getCurrentUserData = async (usersArr, username) => {
-//     const {existingFollower} = await usersArr?.filter((user)=> user.username === username)
-//     console.log(existingFollower) 
-//  }
-// console.log(getCurrentUserData(users, currentUsername)) 
+const [currentFollowers] = users? users.filter((user)=> user.username === currentUsername) : []
+const followingArray = currentFollowers?.following
 
-  const {existingFollowers} = users?.filter((user)=> user.username === currentUsername)
-console.log(existingFollowers)
 
   const updatedUsers = users?.filter((user)=> user.username !== currentUsername);
 
-  console.log(updatedUsers)
 
-  //functionality to add a follower 
+  //functionality to follow a user
 
   const [followUser] = useFollowUserMutation();
 
   const addFollowerHandler = async (userId) => {
-   const{data, error} = await  followUser(userId);
-   console.log(data, error)
+   const{data: userData, error} = await followUser(userId);
+   if (userData) {
+    console.log(`You are now following ${userData.followUser.firstName}`)
+    dispatch(setAlert(`You are now following ${userData.followUser.firstName}`, "success", id))
+    setTimeout(()=> dispatch(removeAlert(id), 5000))
+   }
+
   }
+
+  //functionality to unfollow a user
+
+  const [unfollowUser] = useUnfollowUserMutation();
+
+  const removeFollowerHandler = async (userId) => {
+    const{data:userData, error} = await unfollowUser(userId);
+    if (userData) {
+      console.log(`You unfollowed ${userData.followUser.firstName}`)
+      dispatch(setAlert(`You unfollowed ${userData.followUser.firstName}`, "success", id))
+      setTimeout(()=> dispatch(removeAlert(id), 5000))
+     }
+   }
 
   return (
     <Fragment>
@@ -61,10 +79,10 @@ console.log(existingFollowers)
             </div>
             <div className='follow-users-card-button'>
               {
-                (existingFollowers.find((follower) => follower._id === user._id) === undefined)? (
+                (followingArray?.find((follower) => follower._id === user._id) === undefined)? (
                   <Button variant='outlined' onClick ={()=> addFollowerHandler(user._id) }><AddIcon fontSize='small'/>Follow</Button>
                 ) : (
-                   <Button variant='outlined' onClick ={()=> addFollowerHandler(user._id) }><AddIcon fontSize='small'/>Unfollow</Button>
+                   <Button variant='outlined' onClick ={()=> removeFollowerHandler(user._id) }><RemoveIcon fontSize='small'/>Unfollow</Button>
                 )
               }
             </div>
