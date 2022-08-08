@@ -117,7 +117,7 @@ export const posts = [
     content:
       "At",
     likes: {
-      likeCount: 0,
+      likeCount: 3,
       likedBy: [],
       dislikedBy: [],
     },
