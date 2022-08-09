@@ -3,8 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState= {
   allPosts: [],
-  userPosts: [],
-  bookmarkedPosts: [],
+  userPosts: []
 }
 
 const postsSlice = createSlice({
@@ -13,12 +12,12 @@ const postsSlice = createSlice({
   reducers: {
     addAllPosts: (state, action)=> {
       state.allPosts= action.payload;
-    }
+    },
   }
 })
 
-export const { addAllPosts } = postsSlice.actions;
+export const { addAllPosts, sortByLikes } = postsSlice.actions;
 
 const postsReducer = postsSlice.reducer;
 
-export default postsSlice
+export default postsReducer

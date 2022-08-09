@@ -1,14 +1,13 @@
 import React, {useState, useEffect, Fragment} from 'react';
 import "./posts.css"
-import {Avatar, Button, Input} from "@mui/material"
+import {Avatar, Button} from "@mui/material"
 import "./posts.css"
 import UserComments from './UserComments';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined'
-import { useGetPostsQuery, useRemoveBookmarkMutation } from '../../services/extendedApi';
-import { CircularProgress } from "@mui/material";
+import {useRemoveBookmarkMutation } from '../../services/extendedApi';
 import AddComment from './AddComment';
 import { useAddLikeMutation } from '../../services/extendedApi';
 import { useGetParticularUserQuery } from '../../services/extendedApi';
@@ -21,10 +20,11 @@ import EditModalComponent from '../modal/EditModalComponent';
 import { useDispatch } from 'react-redux';
 import { setAlert, removeAlert } from '../../features/auth/alertSlice';
 import { nanoid } from '@reduxjs/toolkit';
-import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
-import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
-import GifBoxOutlinedIcon from '@mui/icons-material/GifBoxOutlined';
 import { useGetPostsByUsernameQuery } from '../../services/extendedApi';
+import TrendingUpOutlinedIcon from '@mui/icons-material/TrendingUpOutlined';
+import AutorenewOutlinedIcon from '@mui/icons-material/AutorenewOutlined';
+import LatestPostsCard from './LatestPostsCard';
+import TrendingPostsCard from './TrendingPostsCard';
 
 const PostCard = ({posts, editPost, setEditPost}) => {
     const id = nanoid();
@@ -55,8 +55,11 @@ const PostCard = ({posts, editPost, setEditPost}) => {
     //functionality to add a like to a post 
     const [addLike] = useAddLikeMutation();
 
-    const addLikeHandler = async (postId) => {
-       await addLike({postId})
+    const addLikeHandler = async (postId, post) => {
+    const {data, error, isLoading, isSuccess} = await addLike({postId})
+    console.log("after like", userData)
+    console.log("after like", data, error, isLoading, isSuccess)
+    console.log(post)
     }
 
     //functionality to bookmark a post
@@ -89,10 +92,45 @@ const PostCard = ({posts, editPost, setEditPost}) => {
             }
     }
 
+    const [sort, setSort] = useState({
+        default: true,
+        sortByTrending: false, 
+        sortByDate: false
+      })
+
+    const likeSort = ()=> {
+        setSort({
+            ...sort, 
+            default: false,
+            sortByTrending: true,
+            sortByDate: false 
+        })
+      }
+    const dateSort = ()=> {
+        setSort({
+            ...sort, 
+            default: false,
+            sortByTrending: false,
+            sortByDate: true 
+        })
+      }
+
+
+
   return (
     <Fragment>
-    {/* { [...posts].sort((a,b)=> b?.likes?.likeCount - a?.likes?.likeCount)?.map(post=>( */}
-    {posts?.map(post=>(
+    <div className='sort-posts m p'>
+        <h5>Sort By</h5>
+        <div> 
+        <Button variant='outlined' onClick ={likeSort}><span><TrendingUpOutlinedIcon/></span>Trending</Button>
+        </div>
+        <div>
+        <Button variant='outlined' onClick ={dateSort}><AutorenewOutlinedIcon/>Latest</Button>
+        </div>
+    </div>
+    {sort.sortByTrending && <TrendingPostsCard posts={posts} currentUsername={currentUsername} currentUserId={currentUserId} bookmarks={bookmarks} id={id}/> }
+    {sort.sortByDate && <LatestPostsCard posts={posts} currentUsername={currentUsername} currentUserId={currentUserId} bookmarks={bookmarks} id={id}/> }
+    {sort.default && posts?.map(post=>(
         <div className='posts' key={post?._id} >
             <div className='posts-avatar'>
                 <Avatar alt='user-display-pic' src='../images/adarsh-balika.jpg'/>
@@ -122,7 +160,7 @@ const PostCard = ({posts, editPost, setEditPost}) => {
                     <div className='posts-footer'> 
                     {
                         post.likes.likedBy.find((item)=> item._id === currentUserId)=== undefined? (
-                                 <button id='post-like' onClick={()=>addLikeHandler(post._id)}>
+                                 <button id='post-like' onClick={()=>addLikeHandler(post._id, post)}>
                                 <FavoriteBorderOutlinedIcon fontSize='small'/> <span>{post.likes.likeCount}</span>  
                                 </button> 
                         ) : (

@@ -6,6 +6,7 @@ export const extendedApi = mockApiSlice.injectEndpoints({
         getPosts: builder.query({
             query: () => "/posts",
             providesTags: ['POST'],
+            // invalidatesTags: ['POST'],
         }),
         //for adding post
         addPost: builder.mutation({
