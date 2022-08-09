@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { mockApiSlice } from "./services/mockApiSlice";
-import authReducer from "./features/auth/authSlice";
-import alertReducer from "./features/auth/alertSlice";
-import postsReducer from "./features/auth/postsSlice"
+import authReducer from "./features/slices/authSlice";
+import alertReducer from "./features/slices/alertSlice";
+import postsReducer from "./features/slices/postsSlice"
 
 export const store = configureStore({
     reducer: {

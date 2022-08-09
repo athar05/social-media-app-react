@@ -12,13 +12,9 @@ import RequiresAuth from '../components/RequiresAuth';
 import { useSelector } from 'react-redux';
 
 const PageRoutes = () => {
-  // const loginState = localStorage.getItem("auth_token")
   const loginState= useSelector((state)=> state.auth.isAuthenticated) === true? localStorage.getItem("auth_token") : null; 
-  // console.log(loginState)
-  // console.log(loginState2)
   return (
     <Routes>
-      {/* {console.log("login state", loginState)} */}
     <Route exact path="/" element={<LandingPage />}/>
     <Route exact path="/home" element={<RequiresAuth login={loginState}><Home /></RequiresAuth>}/>
     <Route exact path="/explore" element={<RequiresAuth login={loginState}><Explore /> </RequiresAuth>}/>
