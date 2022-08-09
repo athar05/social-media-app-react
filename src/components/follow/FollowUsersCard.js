@@ -4,8 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { useFollowUserMutation } from '../../services/extendedApi';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { useUnfollowUserMutation } from '../../services/extendedApi';
-import { setAlert, removeAlert } from '../../features/auth/alertSlice';
-import { useGetPostsByUsernameQuery } from '../../services/extendedApi';
+import { setAlert, removeAlert } from '../../features/slices/alertSlice';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 

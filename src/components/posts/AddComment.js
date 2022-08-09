@@ -3,7 +3,7 @@ import "./posts.css"
 import {Button, Avatar} from "@mui/material";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import {useAddCommentMutation} from "../../services/extendedApi";
-import {setAlert, removeAlert} from "../../features/auth/alertSlice"
+import {setAlert, removeAlert} from "../../features/slices/alertSlice"
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 

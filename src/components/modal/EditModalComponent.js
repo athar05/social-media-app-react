@@ -6,7 +6,7 @@ import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 import "./modal.css"
 import { useDispatch } from 'react-redux';
-import { setAlert, removeAlert } from '../../features/auth/alertSlice';
+import { setAlert, removeAlert } from '../../features/slices/alertSlice';
 import { nanoid } from '@reduxjs/toolkit';
 import { useGetPostsByPostIdQuery } from '../../services/extendedApi';
 import { useEditPostMutation } from '../../services/extendedApi';

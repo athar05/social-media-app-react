@@ -18,7 +18,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteModalComponent from '../modal/DeleteModalComponent';
 import EditModalComponent from '../modal/EditModalComponent';
 import { useDispatch } from 'react-redux';
-import { setAlert, removeAlert } from '../../features/auth/alertSlice';
+import { setAlert, removeAlert } from '../../features/slices/alertSlice';
 import { nanoid } from '@reduxjs/toolkit';
 import { useGetPostsByUsernameQuery } from '../../services/extendedApi';
 import TrendingUpOutlinedIcon from '@mui/icons-material/TrendingUpOutlined';

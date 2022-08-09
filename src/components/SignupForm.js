@@ -3,8 +3,8 @@ import { Avatar, Button, Grid, Paper, TextField, Typography, FormControl, InputL
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import {signUp} from "../features/auth/authSlice"
-import { setAlert, removeAlert } from '../features/auth/alertSlice';
+import {signUp} from "../features/slices/authSlice"
+import { setAlert, removeAlert } from '../features/slices/alertSlice';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 import Alerts from './Alerts';

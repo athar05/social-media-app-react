@@ -3,7 +3,7 @@ import { AppBar, Toolbar, IconButton, Typography, Stack, Button } from '@mui/mat
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import {Link, useNavigate} from 'react-router-dom'
 import { useDispatch } from 'react-redux';
-import { signOut } from '../features/auth/authSlice';
+import { signOut } from '../features/slices/authSlice';
 
 const Navbar = () => {
 

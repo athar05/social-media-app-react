@@ -15,7 +15,7 @@ import { useDispatch } from 'react-redux';
 import { useAddLikeMutation } from '../../services/extendedApi';
 import { useAddBookmarkMutation } from '../../services/extendedApi';
 import { useRemoveBookmarkMutation } from '../../services/extendedApi';
-import { setAlert, removeAlert } from '../../features/auth/alertSlice';
+import { setAlert, removeAlert } from '../../features/slices/alertSlice';
 
 const LatestPostsCard = ({posts, currentUsername, currentUserId, bookmarks, id}) => {
 
