@@ -45,14 +45,7 @@
     margin-bottom: 0.25rem;
 }
 
-.bookmarked-posts-footer {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    margin-bottom: 0.25rem;
-}
-
-.posts-footer > button, .bookmarked-posts-footer > button {
+.posts-footer > button {
     color: var(--primary);
     font-size: 1rem;
     transition: ease-out 5ms;
