@@ -1,0 +1,74 @@
+.follow {
+    flex: 0.3;
+}
+
+.follow-input {
+    display: flex; 
+    align-items: center;
+    background-color: var(--background-color);
+    border-radius:20px ;
+    margin: 0 0 0 1.2rem
+}
+
+.follow-input:focus {
+    border: 1px solid var(--primary);
+}
+
+.follow-input > input {
+    border: none;
+    background-color: var(--background-color);
+    margin-left: 5px;
+    width: 90%;
+    line-height: 25px;
+}
+
+.follow-input > input:focus {
+    outline: none;
+}
+
+.follow-container {
+  margin-top: 1.1rem;
+  margin-left: 1.2rem;  
+  background-color: var(--background-color);
+  border-radius: 20px;
+}
+
+.follow-users-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: ease-out 5ms;
+}
+
+.follow-users-card:hover {
+    background-color: #e9efef;
+    cursor: pointer;
+}
+
+.follow-users-card-users {
+    display: flex;
+    align-items: center;
+}
+
+.follow-users-card-user-info {
+    margin-left: 0.75rem;
+}
+
+.follow-users {
+    margin-bottom: 1.5rem;
+}
+
+.follow-users-card .follow-users-card-button > Button {
+    border-radius: 30px;
+    background-color: var(--primary);
+    color: var(--white);
+    height: 30px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+@media only screen and (max-width: 600px) {
+    .follow {
+        display: none;
+    }
+}

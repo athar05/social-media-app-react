@@ -1,0 +1,72 @@
+.tweet-box {
+    padding: 0 10px 10px 0;
+    border-bottom: 8px solid var(--border-color);
+}
+
+.tweet-box-input{
+    display: flex;
+    padding: 1.2rem;
+}
+
+.tweet-box > form {
+    display: flex;
+    flex-direction: column;
+}
+
+.tweet-box-input > textarea {
+    flex: 1; 
+    padding-left: 1.2rem;
+    border: none;
+    font-size: 1.1rem;
+    margin-left: 0.35rem;
+    resize: none;
+    overflow: hidden;
+    padding: 0.25rem 0.25rem;
+}
+
+.tweet-box-input > textarea:focus{
+    outline: none;
+    height: 100px;
+}
+
+.tweet-box .tweet-box-button {
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    font-weight: 600;
+    border-radius: 30px;
+    width: 80px;
+    margin-top: 20px;
+    margin-left: auto;
+}
+
+.tweet-box .tweet-box-button:hover {
+    color: var(--primary);
+}
+
+.tweet-box-utilities {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+}
+
+
+.tweet-box-utilities-left {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.2rem;
+    padding-left: 1.2rem;
+}
+
+.tweet-box-utilities-left > .MuiSvgIcon-root {
+    margin:0 5px ;
+    color: var(--primary);
+}
+
+.tweet-box-utilities-left > .MuiSvgIcon-root:hover {
+    background-color: var(--hover);
+    border-radius: 30rem;
+    color: var(--primary);
+    transition: color 1ms ease-out;
+    cursor: pointer;
+}

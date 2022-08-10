@@ -4,11 +4,11 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import {signIn} from "../features/auth/authSlice"
-import { setAlert, removeAlert } from '../features/auth/alertSlice';
+import {signIn} from "../features/slices/authSlice"
+import { setAlert, removeAlert } from '../features/slices/alertSlice';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
-import Alerts from './Alerts';
+  import Alerts from './Alerts';
 import { useNavigate } from "react-router-dom"; 
 import LoginIcon from '@mui/icons-material/Login';
 
@@ -33,23 +33,24 @@ const SigninForm = () => {
 
     const signInUser = async (userInfo) => {
       const {data}= await axios.post("api/auth/login", userInfo);
-      console.log(data)
-      const {createdUser, encodedToken} = await data;
-      localStorage.setItem('user', JSON.stringify(createdUser));
+      // console.log(data)
+      const {foundUser, encodedToken} = await data;
+      // console.log(foundUser)
+      localStorage.setItem('user', JSON.stringify(foundUser));
       localStorage.setItem('auth_token', JSON.stringify(encodedToken))
-      return { user: createdUser, token: encodedToken };
+      return { user: foundUser, token: encodedToken };
     }
 
     //function to send a guest sign in request to a server
     const guestLoginHandler = (e) => {
         e.preventDefault();
 
-        const user = {
+        const userInfo = {
             username: "adarshbalika",
             password: "adarshBalika123"
         }
-        signInUser(user)
-        .then(({user, token})=> dispatch(signIn({user,token})))
+        signInUser(userInfo)
+        .then(({user, token})=> dispatch(signIn({user, token})))
         .then(()=> dispatch(setAlert("Sign Up Successful", "success", id)))
         .then(()=> setTimeout(()=> dispatch(removeAlert(id))))
         .then(()=> 	navigate("/home", { replace: true }))
@@ -74,7 +75,7 @@ const SigninForm = () => {
 
         //form validation 
 
-        const user = {
+        const userInfo = {
             username: enteredUsername,
             password: enteredPassword
         }
@@ -91,7 +92,7 @@ const SigninForm = () => {
                 dispatch(removeAlert(id))
             }, 5000);   
         } else {
-            signInUser(user)
+            signInUser(userInfo)
             .then(({user, token})=> dispatch(signIn({user,token})))
             .then(()=> dispatch(setAlert("Sign Up Successful", "success", id)))
             .then(()=> setTimeout(()=> dispatch(removeAlert(id)), 2000))

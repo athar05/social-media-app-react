@@ -1,0 +1,86 @@
+.sidebar {
+    border-right: 1px solid var(--border-color);
+    padding: 0 2rem;
+    flex: 0.3;
+    min-height: 250px;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+}
+
+.sidebar-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: max-content;
+    padding-right: 1.2rem;
+}
+
+.sidebar .sidebar-option:hover {
+    background-color: var(--hover);
+    border-radius: 30px;
+    color: var(--primary);
+    transition: color 1ms ease-out;
+}
+
+.sidebar-option-active {
+    color: var(--primary) ;
+}
+
+.sidebar-option > .MuiSvgIcon-root {
+    margin: 1rem;
+}
+
+.sidebar-option > h2 {
+    font-weight: 800;
+    font-size: 1rem;
+}
+
+.sidebar .sidebar-button {
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    font-weight: 600;
+    border-radius: 30px;
+    margin-top: 1.35rem;
+}
+
+.sidebar .sidebar-button:hover {
+    background-color: var(--white);
+    color: var(--primary);
+}
+
+@media only screen and (max-width: 600px) {
+    .sidebar{
+        width: 20%;
+        padding: 0 20px 0 5px;
+        margin: 0 20px 0 0 ;
+    }
+
+    .sidebar-option {
+        padding: 5px 5px;
+    }
+
+    .sidebar-option > Icon {
+        margin-right: 0;
+    }
+
+    .sidebar-option > h2 {
+        display: none;
+    }
+
+    .sidebar .sidebar-option:hover {
+        background-color: var(--hover);
+        border-radius: 30px;
+        color: var(--primary);
+        transition: color 1ms ease-out;
+    }
+
+    .sidebar > Button {
+        padding: 20px 20px;
+    }
+
+    .sidebar > Button > div {
+        display: none;
+    }
+  }
