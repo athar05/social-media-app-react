@@ -182,7 +182,6 @@ export const likePostHandler = function (schema, request) {
     );
     post.likes.likeCount += 1;
     post.likes.likedBy.push({...user, bookmarks: []});
-    // post.likes.likedBy.push({...rest});
     console.log(rest)
     this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
     return new Response(201, {}, { posts: this.db.posts });
