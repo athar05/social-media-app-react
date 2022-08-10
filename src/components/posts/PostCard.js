@@ -31,6 +31,8 @@ const PostCard = ({posts, editPost, setEditPost}) => {
     
     const dispatch = useDispatch();
 
+    console.log(posts)
+
 
     //get user
     const {_id:userId} = JSON.parse(localStorage.getItem("user"))
@@ -57,9 +59,9 @@ const PostCard = ({posts, editPost, setEditPost}) => {
 
     const addLikeHandler = async (postId, post) => {
     const {data, error, isLoading, isSuccess} = await addLike({postId})
-    console.log("after like", userData)
-    console.log("after like", data, error, isLoading, isSuccess)
-    console.log(post)
+    // console.log("after like", userData)
+    // console.log("after like", data, error, isLoading, isSuccess)
+    // console.log( a, b)
     }
 
     //functionality to bookmark a post
@@ -160,7 +162,7 @@ const PostCard = ({posts, editPost, setEditPost}) => {
                     <div className='posts-footer'> 
                     {
                         post.likes.likedBy.find((item)=> item._id === currentUserId)=== undefined? (
-                                 <button id='post-like' onClick={()=>addLikeHandler(post._id, post)}>
+                                 <button id='post-like' onClick={()=>addLikeHandler(post._id, post, post._id, currentUserId)}>
                                 <FavoriteBorderOutlinedIcon fontSize='small'/> <span>{post.likes.likeCount}</span>  
                                 </button> 
                         ) : (

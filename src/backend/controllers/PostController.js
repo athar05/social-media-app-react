@@ -155,7 +155,7 @@ export const editPostHandler = function (schema, request) {
 
 export const likePostHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
-  const {likes, ...rest} = user;
+  const {likes, bookmarks, ...rest} = user;
   try {
     if (!user) {
       return new Response(
@@ -181,9 +181,13 @@ export const likePostHandler = function (schema, request) {
       (currUser) => currUser._id !== user._id
     );
     post.likes.likeCount += 1;
-    post.likes.likedBy.push({...user, bookmarks: []});
-    console.log(rest)
+    post.likes.likedBy.push({...rest});
+    // user.bookmarks = user.bookmarks.filter(bookmarkedPost=> bookmarkedPost._id === post._id? {...bookmarkedPost, likes: {...bookmarkedPost.likes, likeCount: bookmarkedPost.likes.likeCount + 1, likedBy: [...bookmarkedPost.likes.likedBy, rest]}} : bookmarkedPost)
+    
+    // console.log("post controller", user.bookmarks)
     this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
+    // this.db.users.update({ _id: user._id }, { ...user, updatedAt: formatDate() });
+    // console.log(this.db.users)
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     console.log(error)

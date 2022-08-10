@@ -144,6 +144,12 @@ body {
   justify-content: space-between;
 }
 
+.flex-row-flex-end {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
 /* Navbar */
 
 #navbar {
@@ -224,7 +230,7 @@ Button {
 
 /* home page */
 
-.home-container {
+.home-container, .bookmarks-container {
   display: flex;
   height: 100vh;
   max-width: 1300px;

@@ -25,6 +25,8 @@
 
 .sidebar-option-active {
     color: var(--primary) ;
+    text-decoration: none;
+    background-color: black;
 }
 
 .sidebar-option > .MuiSvgIcon-root {
