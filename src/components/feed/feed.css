@@ -1,4 +1,4 @@
-.feed {
+.feed, .bookmark-feed {
     flex: 0.4;
     border-right: 1px solid var(--border-color);
     min-width: fit-content;
@@ -8,7 +8,7 @@
 }
 
 /* Hiding scroll bar for Chrome, Safari and Opera */
-.feed::-webkit-scrollbar {
+.feed::-webkit-scrollbar, .bookmark-feed::-webkit-scrollbar  {
     display: none;
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import SidebarOptions from './SidebarOptions';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
@@ -7,6 +7,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import { Button } from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
 import "./sidebar.css"
+import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
 
@@ -15,13 +16,15 @@ const Sidebar = () => {
   }
 
   return (
+    <Fragment>
     <section className='sidebar'>
-        <SidebarOptions active Icon={HomeOutlinedIcon} text="Home" />
-        <SidebarOptions Icon={ExploreOutlinedIcon} text="Explore" />
-        <SidebarOptions Icon={BookmarkBorderIcon} text="Bookmarks" />
-        <SidebarOptions Icon={AccountCircleOutlinedIcon} text="Profile" />
-        <Button className='sidebar-button' variant='outlined' fullWidth onClick={clickHandler}><CreateIcon/><div className="text">Create Post</div></Button>
+       <NavLink to="/home" className={isActive => (isActive ? "sidebar-option-active" : "")}> <SidebarOptions Icon={HomeOutlinedIcon} text="Home" /> </NavLink> 
+       <NavLink to="/explore" className={isActive => (isActive ? "sidebar-option-active" : "")}> <SidebarOptions Icon={ExploreOutlinedIcon} text="Explore" /></NavLink> 
+       <NavLink to="/bookmark" className={isActive => (isActive ? "sidebar-option-active" : "")}> <SidebarOptions Icon={BookmarkBorderIcon} text="Bookmarks" /></NavLink> 
+       <NavLink to="/profile" className={isActive => (isActive ? "sidebar-option-active" : "")}>  <SidebarOptions Icon={AccountCircleOutlinedIcon} text="Profile" /></NavLink> 
+       <Button className='sidebar-button' variant='outlined' fullWidth onClick={clickHandler}><CreateIcon/><div className="text">Create Post</div></Button>
     </section>
+    </Fragment>
   )
 }
 
