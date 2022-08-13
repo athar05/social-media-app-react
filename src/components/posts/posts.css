@@ -45,6 +45,13 @@
     margin-bottom: 0.25rem;
 }
 
+.bookmarked-posts-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-bottom: 0.25rem;
+}
+
 .posts-footer > button {
     color: var(--primary);
     font-size: 1rem;
@@ -55,7 +62,23 @@
     align-items: center;
 }
 
+.bookmarked-posts-footer > button {
+    color: var(--primary);
+    font-size: 1rem;
+    transition: ease-out 5ms;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+}
+
 .posts-body .posts-footer > button {
+    color: var(--primary);
+    transition: color 1ms ease-out;
+    cursor: pointer;
+}
+
+.posts-body .bookmarked-posts-footer > button {
     color: var(--primary);
     transition: color 1ms ease-out;
     cursor: pointer;
