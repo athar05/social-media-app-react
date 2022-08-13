@@ -2,17 +2,10 @@ import React, {Fragment} from 'react';
 import { useGetParticularUserQuery, useRemoveBookmarkMutation } from '../../services/extendedApi';
 import "./posts.css"
 import { Avatar } from '@mui/material';
-import EditModalComponent from "../modal/EditModalComponent"
-import DeleteModalComponent from "../modal/DeleteModalComponent"
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined'
 import AddComment from "./AddComment"
 import UserComments from "./UserComments"
-import { useGetBookmarksQuery } from '../../services/extendedApi';
 import { useAddLikeMutation } from '../../services/extendedApi';
 import { useDispatch } from 'react-redux/es/exports';
 import { nanoid } from '@reduxjs/toolkit';
@@ -27,15 +20,7 @@ const BookmarkedPosts = ({posts}) => {
         //get user
         const {_id:userId} = JSON.parse(localStorage.getItem("user"))
         const {data: userData} = useGetParticularUserQuery(userId);
-        const currentUserId = userData?.user?._id
-        const currentUsername = userData?.user?.username
 
-        //getBookmarks 
-
-    // const {data: bookmarksData, error, isLoading, isSuccess} = useGetBookmarksQuery();
-    // const bookmarks = bookmarksData?.bookmarks;
-
-    //functionality to remove a post from bookmarks 
 
     const [removeBookmark] = useRemoveBookmarkMutation();
 
@@ -49,18 +34,6 @@ const BookmarkedPosts = ({posts}) => {
                dispatch(setAlert(error.data.errors, "error", id))
                setTimeout(()=> dispatch(removeAlert(id)), 5000) 
             }
-    }
-
-    
-    //functionality to add a like to a post 
-    const [addLike] = useAddLikeMutation();
-
-    const addLikeHandler = async (postId, post, a,b) => {
-    const {data, error, isLoading, isSuccess} = await addLike({postId})
-    console.log("after like", userData)
-    console.log("after like", data, error, isLoading, isSuccess)
-    console.log(post)
-    console.log(a, b)
     }
 
 
@@ -85,21 +58,8 @@ const BookmarkedPosts = ({posts}) => {
                         <p>{post.content}</p>
                     </div>
                 </div>
-                {/* <img src='https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif' alt='gif'/> */}
 
                     <div className='bookmarked-posts-footer'> 
-                    {/* {
-                        post.likes.likedBy.find((item)=> item._id === currentUserId)=== undefined? (
-                                 <button id='post-like' onClick={()=>addLikeHandler(post._id, post, post._id, currentUserId)}>
-                                <FavoriteBorderOutlinedIcon fontSize='small'/> <span>{post.likes.likeCount}</span>  
-                                </button> 
-                        ) : (
-                            <button id='post-like' className='active-button'>
-                               <FavoriteOutlinedIcon fontSize='small'/> <span>{post.likes.likeCount}</span>  
-                               </button> 
-                        )
-                    }     */}
-
                 {posts?.find((item)=> item._id=== post._id) === undefined? ( 
                 <button>
                 <BookmarkBorderOutlinedIcon  fontSize='small'/>
