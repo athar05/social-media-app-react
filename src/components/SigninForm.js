@@ -42,7 +42,7 @@ const SigninForm = () => {
     setShowPassword((prev) => !prev);
   };
 
-  //function to send a sign in request to a user
+  //function to send a sign in request to a server
 
   const signInUser = async (userInfo) => {
     const { data } = await axios.post("api/auth/login", userInfo);
