@@ -1,7 +1,6 @@
 import React from "react";
 import "./user-profile.css";
 import { Avatar, Button } from "@mui/material";
-import {} from "@mui/material";
 import "./user-profile.css";
 import { useSelector } from "react-redux/es/exports";
 import EditProfileComponent from "./EditProfileComponent";
@@ -9,10 +8,8 @@ import Alerts from "../Alerts";
 
 const UserProfileContainer = () => {
   const userDetails = useSelector((state) => state.auth.user);
-  console.log(userDetails);
 
   const existingDetails = JSON.parse(localStorage.getItem("user"));
-  console.log(existingDetails);
 
   return (
     <div className="user-profile-details m">
