@@ -1,40 +1,50 @@
-import React from 'react';
+import React from "react";
 import "./user-profile.css";
-import { Avatar } from '@mui/material';
-import {Button} from '@mui/material'
-import EditProfileComponent from './EditProfileComponent';
-import { useGetParticularUserQuery } from '../../services/extendedApi';
+import { Avatar, Button } from "@mui/material";
+import {} from "@mui/material";
+import "./user-profile.css";
+import { useSelector } from "react-redux/es/exports";
+import EditProfileComponent from "./EditProfileComponent";
+import Alerts from "../Alerts";
 
 const UserProfileContainer = () => {
+  const userDetails = useSelector((state) => state.auth.user);
+  console.log(userDetails);
 
-  const {_id:userId} = JSON.parse(localStorage.getItem("user"))
-  const {data: userData} = useGetParticularUserQuery(userId);
-  console.log(userData)
-  const userFirstName = userData?.user?.firstName
-  const userUsername = userData?.user?.username
-  const userFollowers = userData?.user?.followers?.length
-  const userFollowing = userData?.user?.following?.length 
-  const userBio = userData?.user?.bio
-  const userProfileUrl = userData?.user?.profileUrl
+  const existingDetails = JSON.parse(localStorage.getItem("user"));
+  console.log(existingDetails);
 
   return (
-    <div className='user-profile-details m'>
-        <h2>Profile</h2>
-        <div>
-          <div className='profile-pic'>
-            <Avatar className='m'  sx={{ width: 70, height: 70   }}/>
-            <Button variant='outlined' className='profile-button'>Update</Button>
-          </div>
-            <h3>{userFirstName}</h3>
-            <h4>{userUsername}</h4>
-            <h4>Followers: {userFollowers}</h4>
-            <h4>Following: {userFollowing}</h4>
-            <h4>Bio: {userBio}</h4>
-            <h4>Profile URL: {userProfileUrl}</h4>
+    <div className="user-profile-details m">
+      <Alerts />
+      <h2>Profile</h2>
+      <div>
+        <div className="profile-pic">
+          <Avatar className="m" sx={{ width: 70, height: 70 }} />
+          <Button variant="outlined" className="profile-button">
+            Update
+          </Button>
         </div>
-        <EditProfileComponent/>
+        <h3>{userDetails?.firstName || existingDetails?.firstname}</h3>
+        <h4>@{userDetails?.username || existingDetails?.username}</h4>
+        <h4>
+          Followers:{" "}
+          {userDetails?.followers?.length || existingDetails?.followers?.length}
+        </h4>
+        <h4>
+          Following:{" "}
+          {userDetails?.following?.length || existingDetails?.following?.length}
+        </h4>
+        <h4>Bio: {userDetails?.bio || existingDetails?.bio}</h4>
+        <h4>
+          Profile URL: {userDetails?.profileUrl || existingDetails?.profileUrl}
+        </h4>
+      </div>
+      <div className="edit-profile-component">
+        <EditProfileComponent />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserProfileContainer
+export default UserProfileContainer;
