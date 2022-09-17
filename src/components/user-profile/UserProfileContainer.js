@@ -1,26 +1,50 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "./user-profile.css";
 import { Avatar, Button } from "@mui/material";
 import "./user-profile.css";
 import { useSelector } from "react-redux/es/exports";
 import EditProfileComponent from "./EditProfileComponent";
 import Alerts from "../Alerts";
+import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 
 const UserProfileContainer = () => {
   const userDetails = useSelector((state) => state.auth.user);
 
   const existingDetails = JSON.parse(localStorage.getItem("user"));
 
+  const fileUploadRef = useRef(null);
+
+  const [profilePic, setProfilePic] = useState("");
+
+  const clickHandler = () => {
+    fileUploadRef.current.click();
+  };
+
+  const imageUploadChangeHandler = (event) => {
+    setProfilePic(URL.createObjectURL(event.target.files[0]));
+  };
+
   return (
     <div className="user-profile-details m">
       <Alerts />
-      <h2>Profile</h2>
+      <h2>Your Profile</h2>
       <div>
         <div className="profile-pic">
-          <Avatar className="m" sx={{ width: 70, height: 70 }} />
-          <Button variant="outlined" className="profile-button">
-            Update
-          </Button>
+          <Avatar
+            className="m"
+            sx={{ width: 70, height: 70 }}
+            src={profilePic}
+          />
+          <AddCircleOutlineRoundedIcon
+            id="upload-image-btn"
+            onClick={clickHandler}
+          />
+          <input
+            type="file"
+            style={{ display: "none" }}
+            ref={fileUploadRef}
+            onChange={imageUploadChangeHandler}
+          />
         </div>
         <h3>{userDetails?.firstName || existingDetails?.firstname}</h3>
         <h4>@{userDetails?.username || existingDetails?.username}</h4>

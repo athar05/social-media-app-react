@@ -1,9 +1,11 @@
 .user-profile-details{
     flex: 0.4;
     border-right: 1px solid var(--border-color);
+    min-width: -webkit-fit-content;
+    min-width: -moz-fit-content;
     min-width: fit-content;
     overflow-y: scroll;
-    -ms-overflow-style: none; 
+    -ms-overflow-style: none;
     scrollbar-width: none   ;
 }
 
@@ -35,6 +37,25 @@
 .edit-profile-component .edit-profile-component-form {
     display: flex;
     flex-direction: column;
+}
+
+.profile-pic {
+    position: relative;
+}
+
+
+#upload-image-btn {
+    color: var(--primary);
+    background-color: var(--white);
+    border-radius: 10px;
+    position: absolute;
+    bottom: 10px;
+    left: 55px
+}
+
+#upload-image-btn:hover {
+    background-color: var(--hover);
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {
