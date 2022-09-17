@@ -17,6 +17,8 @@ export const users = [
     followers: [],
     following: [],
     bookmarks: [],
+    bio: "",
+    profileUrl: ""
   },
   {
     _id: 2,
@@ -29,6 +31,8 @@ export const users = [
     followers: [],
     following: [],
     bookmarks: [],
+    bio: "",
+    profileUrl: ""
   },
   {
     _id: 3,
@@ -41,6 +45,8 @@ export const users = [
     followers: [],
     following: [],
     bookmarks: [],
+    bio: "",
+    profileUrl: ""
   },
   {
     _id: 4,
@@ -53,6 +59,8 @@ export const users = [
     followers: [],
     following: [],
     bookmarks: [],
+    bio: "",
+    profileUrl: ""
   },
   {
     _id: 5,
@@ -65,5 +73,7 @@ export const users = [
     followers: [],
     following: [],
     bookmarks: [],
+    bio: "",
+    profileUrl: ""
   }
 ];

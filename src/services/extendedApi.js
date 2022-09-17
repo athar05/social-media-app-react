@@ -66,8 +66,7 @@ export const extendedApi = mockApiSlice.injectEndpoints({
         query: ()=> "/users",
         providesTags: ['USER']
           }),
-       //for getting a particular user \
-
+       //for getting a particular user 
            getParticularUser: builder.query({
         query: (userId) =>  `/users/${userId}`,
             providesTags: ['USER']
@@ -93,7 +92,7 @@ export const extendedApi = mockApiSlice.injectEndpoints({
                 }),
                 invalidatesTags: ["USER"]
             }),
-
+            //for removing a bookmark
             removeBookmark: builder.mutation({
                 query: ({postId}) => ({
                     url: `/users/remove-bookmark/${postId}`,
@@ -117,6 +116,16 @@ export const extendedApi = mockApiSlice.injectEndpoints({
                 }),
                 invalidatesTags: ['USER'],
               }),
+
+              //for editing user details 
+              editProfile: builder.mutation({
+                query: (userDetails) => ({
+                    url: "users/edit",
+                    method: "POST",
+                    body: {user: userDetails}
+                }),
+                invalidatesTags: ['USER'],
+              })
       })
 })
 
@@ -135,4 +144,5 @@ export const {useGetPostsQuery,
               useAddBookmarkMutation,
               useRemoveBookmarkMutation,
               useFollowUserMutation,
-              useUnfollowUserMutation} = extendedApi;
+              useUnfollowUserMutation,
+            useEditProfileMutation} = extendedApi;
