@@ -6,8 +6,15 @@ import { useSelector } from "react-redux/es/exports";
 import EditProfileComponent from "./EditProfileComponent";
 import Alerts from "../Alerts";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
+import { useDispatch } from "react-redux/es/exports";
+import { setAlert } from "../../features/slices/alertSlice";
+import { removeAlert } from "../../features/slices/alertSlice";
+import { nanoid } from "@reduxjs/toolkit";
 
 const UserProfileContainer = () => {
+  const id = nanoid();
+  const dispatch = useDispatch();
+
   const userDetails = useSelector((state) => state.auth.user);
 
   const existingDetails = JSON.parse(localStorage.getItem("user"));
@@ -22,6 +29,8 @@ const UserProfileContainer = () => {
 
   const imageUploadChangeHandler = (event) => {
     setProfilePic(URL.createObjectURL(event.target.files[0]));
+    dispatch(setAlert("Profile Pic Added", "success", id));
+    setTimeout(() => dispatch(removeAlert(id)), 5000);
   };
 
   return (
