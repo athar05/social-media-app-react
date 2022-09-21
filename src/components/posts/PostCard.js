@@ -26,7 +26,7 @@ import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
 import LatestPostsCard from "./LatestPostsCard";
 import TrendingPostsCard from "./TrendingPostsCard";
 
-const PostCard = ({ posts, editPost, setEditPost }) => {
+const PostCard = ({ posts }) => {
   const id = nanoid();
 
   const dispatch = useDispatch();
@@ -39,9 +39,6 @@ const PostCard = ({ posts, editPost, setEditPost }) => {
   const currentUserId = userData?.user?._id;
   const currentUsername = userData?.user?.username;
 
-  const { data: postByUser } = useGetPostsByUsernameQuery(
-    userData?.user?.username
-  );
   // console.log(postByUser)
 
   //get posts
@@ -51,12 +48,7 @@ const PostCard = ({ posts, editPost, setEditPost }) => {
 
   //getBookmarks
 
-  const {
-    data: bookmarksData,
-    error,
-    isLoading,
-    isSuccess,
-  } = useGetBookmarksQuery();
+  const { data: bookmarksData } = useGetBookmarksQuery();
   const bookmarks = bookmarksData?.bookmarks;
 
   //functionality to add a like to a post
@@ -73,7 +65,7 @@ const PostCard = ({ posts, editPost, setEditPost }) => {
   const [addBookmark] = useAddBookmarkMutation();
 
   const addBookmarkHandler = async (postId) => {
-    const { data, error, isLoading, isSuccess } = await addBookmark({ postId });
+    const { data, error } = await addBookmark({ postId });
     if (data) {
       dispatch(setAlert("The post has been bookmarked", "success", id));
       setTimeout(() => dispatch(removeAlert(id)), 5000);

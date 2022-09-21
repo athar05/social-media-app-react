@@ -9,14 +9,13 @@ import { formatDate } from "../utils/authUtils";
 export const posts = [
   {
     _id: uuid(),
-    content:
-      "Hello hello hello",
+    content: "Hello hello hello",
     likes: {
       likeCount: 0,
       likedBy: [],
       dislikedBy: [],
     },
-    firstname: "Adarsh", 
+    firstname: "Adarsh",
     lastname: "Balika",
     username: "adarshbalika",
     createdAt: formatDate(),
@@ -44,14 +43,13 @@ export const posts = [
   },
   {
     _id: uuid(),
-    content:
-      "What's up?",
+    content: "What's up?",
     likes: {
       likeCount: 0,
       likedBy: [],
       dislikedBy: [],
     },
-    firstname: "Adarsh", 
+    firstname: "Adarsh",
     lastname: "Balika",
     username: "adarshbalika",
     createdAt: formatDate(),
@@ -79,14 +77,13 @@ export const posts = [
   },
   {
     _id: uuid(),
-    content:
-      "Ki haal hai?",
+    content: "Ki haal hai?",
     likes: {
       likeCount: 0,
       likedBy: [],
       dislikedBy: [],
     },
-    firstname: "Adarsh", 
+    firstname: "Adarsh",
     lastname: "Balika",
     username: "adarshbalika",
     createdAt: formatDate(),
@@ -114,14 +111,13 @@ export const posts = [
   },
   {
     _id: uuid(),
-    content:
-      "At",
+    content: "At",
     likes: {
       likeCount: 3,
       likedBy: [],
       dislikedBy: [],
     },
-    firstname: "Athar", 
+    firstname: "Athar",
     lastname: "Shakeel",
     username: "athar05",
     createdAt: formatDate(),
@@ -158,5 +154,20 @@ export const posts = [
     ],
     createdAt: formatDate(),
     updatedAt: formatDate(),
+  },
+  {
+    _id: uuid(),
+    content: "Time is but a stubborn Illusion",
+    likes: {
+      likeCount: 2,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    firstname: "Test",
+    lastname: "Tester",
+    username: "tester",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    comments: [],
   },
 ];

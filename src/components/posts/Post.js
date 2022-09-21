@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import PostCard from "./PostCard";
 import { useGetPostsQuery } from "../../services/extendedApi";
 import { CircularProgress } from "@mui/material";
@@ -24,31 +24,31 @@ const Post = () => {
   const followingUsers = userData?.user?.following;
 
   const followingArray = followingUsers?.map((el) => el.firstName);
-  console.log(followingArray?.map((el) => el));
+  console.log(followingArray);
 
   //get posts
   const { data: poData, error, isLoading, isSuccess } = useGetPostsQuery();
-  const userPosts = poData?.posts;
-  dispatch(addAllPosts(userPosts));
+  // dispatch(addAllPosts(poData?.posts));
 
-  const allPosts = useSelector((state) => state.posts?.allPosts);
-  console.log(userPosts?.map((el) => el.firstname));
-  console.log(
-    userPosts?.map((el) => el.firstname === followingArray?.map((el) => el))
-  );
-  console.log(userPosts?.map((el) => el.firstname === "Athar"));
+  const allPosts = poData?.posts;
 
-  const getPosts = (arr1, arr2) => {
+  const getPosts = (arr1, arr2, string) => {
     const finalPosts = [];
 
-    userPosts?.forEach((el) =>
-      followingArray?.forEach((el2) => {
-        if (el.firstname === el2 || el.firstname === userFirstName) {
+    arr1?.forEach((el) =>
+      arr2.forEach((el2) => {
+        if (el?.firstname === el2 || el?.firstname === string) {
           finalPosts.push(el);
         }
       })
     );
-    return finalPosts;
+
+    const jsonObj = finalPosts.map(JSON.stringify);
+    const uniqueSet = new Set(jsonObj);
+    const uniqueArr = Array.from(uniqueSet).map(JSON.parse);
+
+    return uniqueArr;
+    // return finalPosts;
   };
 
   console.log(followingArray);
@@ -61,8 +61,11 @@ const Post = () => {
 
   // console.log(getPosts2);
 
-  const updatedPosts = getPosts(userPosts, followingArray);
-  console.log(updatedPosts);
+  const updatedPosts = getPosts(
+    allPosts,
+    followingArray?.length > 0 ? followingArray : [""],
+    userFirstName
+  );
 
   return (
     <Fragment>
