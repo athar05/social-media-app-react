@@ -1,39 +1,72 @@
-import React, {Fragment, useState} from 'react';
-import PostCard from './PostCard';
-import { useGetPostsQuery } from '../../services/extendedApi';
-import { CircularProgress } from '@mui/material';
-import "../sort-posts/sortposts.css"
-import { addAllPosts } from '../../features/slices/postsSlice';
-import { useDispatch, useSelector } from 'react-redux/es/exports';
+import React, { Fragment } from "react";
+import PostCard from "./PostCard";
+import { useGetPostsQuery } from "../../services/extendedApi";
+import { CircularProgress } from "@mui/material";
+import "../sort-posts/sortposts.css";
+import {
+  useGetUsersQuery,
+  useGetParticularUserQuery,
+} from "../../services/extendedApi";
 
+const Post = () => {
+  const { data } = useGetUsersQuery();
 
+  console.log(data);
 
-const Post =  () => {
+  const { _id: userId, firstName: userFirstName } = JSON.parse(
+    localStorage.getItem("user")
+  );
+  const { data: userData } = useGetParticularUserQuery(userId);
+  const followingUsers = userData?.user?.following;
 
-  const dispatch = useDispatch();
+  const followingArray = followingUsers?.map((el) => el.firstName);
+  console.log(followingArray);
 
-        //get posts
-        const { data:poData, error, isLoading, isSuccess } = useGetPostsQuery();
-        const userPosts = poData?.posts
-        dispatch(addAllPosts(userPosts))
+  //get posts
+  const { data: poData, error, isLoading, isSuccess } = useGetPostsQuery();
 
-       const allPosts = useSelector(state=> state.posts?.allPosts)
+  const allPosts = poData?.posts;
+
+  //function to filter posts of following users only
+
+  const getPosts = (arr1, arr2, string) => {
+    const finalPosts = [];
+
+    arr1?.forEach((el) =>
+      arr2.forEach((el2) => {
+        if (el?.firstname === el2 || el?.firstname === string) {
+          finalPosts.push(el);
+        }
+      })
+    );
+
+    //to remove duplicate elements from the posts array
+    const jsonPost = finalPosts.map(JSON.stringify);
+    const filteredPosts = new Set(jsonPost);
+    const uniquePosts = Array.from(filteredPosts).map(JSON.parse);
+
+    return uniquePosts;
+  };
+
+  console.log(followingArray);
+
+  const updatedPosts = getPosts(
+    allPosts,
+    followingArray?.length > 0 ? followingArray : [""],
+    userFirstName
+  );
 
   return (
     <Fragment>
-            {
-        isLoading && <div className='text-center'>
-        <CircularProgress/>
+      {isLoading && (
+        <div className="text-center">
+          <CircularProgress />
         </div>
-        }
-        {
-            error && <h2>There Was An Error Loading Data</h2>
-        }
-  {isSuccess &&
- <PostCard posts={allPosts}/> }
-    
+      )}
+      {error && <h2>There Was An Error Loading Data</h2>}
+      {isSuccess && <PostCard posts={updatedPosts} />}
     </Fragment>
-  )
-}
+  );
+};
 
-export default Post
+export default Post;

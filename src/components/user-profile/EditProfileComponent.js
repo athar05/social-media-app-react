@@ -19,7 +19,13 @@ const EditProfileComponent = () => {
   const dispatch = useDispatch();
   const id = nanoid();
 
-  const { _id: userId } = JSON.parse(localStorage.getItem("user"));
+  const {
+    _id: userId,
+    firstName,
+    username,
+    bio,
+    profileUrl,
+  } = JSON.parse(localStorage.getItem("user"));
   const encodedToken = JSON.parse(localStorage.getItem("auth_token"));
 
   const userFirstNameInputRef = useRef();
@@ -56,10 +62,22 @@ const EditProfileComponent = () => {
     e.preventDefault();
 
     const userData = {
-      firstName: userFirstNameInputRef?.current?.value,
-      username: userUserNameInputRef?.current?.value,
-      bio: userBioInputRef?.current?.value,
-      profileUrl: userProfileUrlInputRef?.current?.value,
+      firstName:
+        userFirstNameInputRef?.current?.value.length > 0
+          ? userFirstNameInputRef?.current?.value
+          : firstName,
+      username:
+        userUserNameInputRef?.current?.value.length > 0
+          ? userUserNameInputRef?.current?.value
+          : username,
+      bio:
+        userBioInputRef?.current?.value.length > 0
+          ? userBioInputRef?.current?.value
+          : bio,
+      profileUrl:
+        userProfileUrlInputRef?.current?.value.length > 0
+          ? userProfileUrlInputRef?.current?.value
+          : profileUrl,
     };
     updateUserInfo(userData)
       .then((data) => {
