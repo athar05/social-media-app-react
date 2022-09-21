@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import Sidebar from "../components/sidebar/Sidebar";
-import Feed from "../components/feed/Feed";
+import ExploreFeed from "../components/feed/ExploreFeed";
 import Navbar from "../components/Navbar";
 import Follow from "../components/follow/Follow";
 
@@ -12,7 +12,7 @@ const Explore = () => {
       </div>
       <section className="home-container">
         <Sidebar />
-        <Feed />
+        <ExploreFeed />
         <Follow />
       </section>
     </Fragment>

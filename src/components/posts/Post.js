@@ -3,16 +3,12 @@ import PostCard from "./PostCard";
 import { useGetPostsQuery } from "../../services/extendedApi";
 import { CircularProgress } from "@mui/material";
 import "../sort-posts/sortposts.css";
-import { addAllPosts } from "../../features/slices/postsSlice";
-import { useDispatch, useSelector } from "react-redux/es/exports";
 import {
   useGetUsersQuery,
   useGetParticularUserQuery,
 } from "../../services/extendedApi";
 
 const Post = () => {
-  const dispatch = useDispatch();
-
   const { data } = useGetUsersQuery();
 
   console.log(data);
@@ -28,9 +24,10 @@ const Post = () => {
 
   //get posts
   const { data: poData, error, isLoading, isSuccess } = useGetPostsQuery();
-  // dispatch(addAllPosts(poData?.posts));
 
   const allPosts = poData?.posts;
+
+  //function to filter posts of following users only
 
   const getPosts = (arr1, arr2, string) => {
     const finalPosts = [];
@@ -43,23 +40,15 @@ const Post = () => {
       })
     );
 
-    const jsonObj = finalPosts.map(JSON.stringify);
-    const uniqueSet = new Set(jsonObj);
-    const uniqueArr = Array.from(uniqueSet).map(JSON.parse);
+    //to remove duplicate elements from the posts array
+    const jsonPost = finalPosts.map(JSON.stringify);
+    const filteredPosts = new Set(jsonPost);
+    const uniquePosts = Array.from(filteredPosts).map(JSON.parse);
 
-    return uniqueArr;
-    // return finalPosts;
+    return uniquePosts;
   };
 
   console.log(followingArray);
-
-  // const getPosts2 = userPosts?.forEach((el) =>
-  //   followingArray?.forEach(
-  //     (el2) => el.firstname === el2 || el.firstname === userFirstName
-  //   )
-  // );
-
-  // console.log(getPosts2);
 
   const updatedPosts = getPosts(
     allPosts,

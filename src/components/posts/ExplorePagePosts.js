@@ -1,20 +1,14 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import PostCard from "./PostCard";
 import { useGetPostsQuery } from "../../services/extendedApi";
 import { CircularProgress } from "@mui/material";
 import "../sort-posts/sortposts.css";
-import { addAllPosts } from "../../features/slices/postsSlice";
-import { useDispatch, useSelector } from "react-redux/es/exports";
 
-const HomePost = () => {
-  const dispatch = useDispatch();
-
+const ExplorePagePost = () => {
   //get posts
   const { data: poData, error, isLoading, isSuccess } = useGetPostsQuery();
-  const userPosts = poData?.posts;
-  dispatch(addAllPosts(userPosts));
 
-  const allPosts = useSelector((state) => state.posts?.allPosts);
+  const allPosts = poData?.posts;
 
   return (
     <Fragment>
@@ -29,4 +23,4 @@ const HomePost = () => {
   );
 };
 
-export default HomePost;
+export default ExplorePagePost;
