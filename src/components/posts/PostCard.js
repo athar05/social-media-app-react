@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import "./posts.css";
 import { Avatar, Button } from "@mui/material";
 import "./posts.css";
@@ -9,10 +9,13 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import { useRemoveBookmarkMutation } from "../../services/extendedApi";
 import AddComment from "./AddComment";
-import { useAddLikeMutation } from "../../services/extendedApi";
-import { useGetParticularUserQuery } from "../../services/extendedApi";
-import { useGetBookmarksQuery } from "../../services/extendedApi";
-import { useAddBookmarkMutation } from "../../services/extendedApi";
+import {
+  useAddLikeMutation,
+  useRemoveLikeMutation,
+  useAddBookmarkMutation,
+  useGetBookmarksQuery,
+  useGetParticularUserQuery,
+} from "../../services/extendedApi";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteModalComponent from "../modal/DeleteModalComponent";
@@ -20,7 +23,6 @@ import EditModalComponent from "../modal/EditModalComponent";
 import { useDispatch } from "react-redux";
 import { setAlert, removeAlert } from "../../features/slices/alertSlice";
 import { nanoid } from "@reduxjs/toolkit";
-import { useGetPostsByUsernameQuery } from "../../services/extendedApi";
 import TrendingUpOutlinedIcon from "@mui/icons-material/TrendingUpOutlined";
 import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
 import LatestPostsCard from "./LatestPostsCard";
@@ -39,13 +41,6 @@ const PostCard = ({ posts }) => {
   const currentUserId = userData?.user?._id;
   const currentUsername = userData?.user?.username;
 
-  // console.log(postByUser)
-
-  //get posts
-  // const { data, error, isLoading, isSuccess } = useGetPostsQuery();
-  // const userPosts = data?.posts
-  // console.log(userPosts)
-
   //getBookmarks
 
   const { data: bookmarksData } = useGetBookmarksQuery();
@@ -55,10 +50,18 @@ const PostCard = ({ posts }) => {
   const [addLike] = useAddLikeMutation();
 
   const addLikeHandler = async (postId, post) => {
-    const { data, error, isLoading, isSuccess } = await addLike({ postId });
+    await addLike({ postId });
     // console.log("after like", userData)
     // console.log("after like", data, error, isLoading, isSuccess)
     // console.log( a, b)
+  };
+
+  //functionality to remove a like from a post
+
+  const [removeLike] = useRemoveLikeMutation();
+
+  const removeLikeHandler = async (postId, post) => {
+    await removeLike({ postId });
   };
 
   //functionality to bookmark a post
@@ -80,7 +83,7 @@ const PostCard = ({ posts }) => {
   const [removeBookmark] = useRemoveBookmarkMutation();
 
   const removeBookmarkHandler = async (postId) => {
-    const { data, error, isLoading, isSuccess } = await removeBookmark({
+    const { data, error } = await removeBookmark({
       postId,
     });
     console.log(data, error);
@@ -207,14 +210,20 @@ const PostCard = ({ posts }) => {
                   <button
                     id="post-like"
                     onClick={() =>
-                      addLikeHandler(post._id, post, post._id, currentUserId)
+                      addLikeHandler(post._id, post, currentUserId)
                     }
                   >
                     <FavoriteBorderOutlinedIcon fontSize="small" />{" "}
                     <span>{post.likes.likeCount}</span>
                   </button>
                 ) : (
-                  <button id="post-like" className="active-button">
+                  <button
+                    id="post-like"
+                    className="active-button"
+                    onClick={() =>
+                      removeLikeHandler(post._id, post, currentUserId)
+                    }
+                  >
                     <FavoriteOutlinedIcon fontSize="small" />{" "}
                     <span>{post.likes.likeCount}</span>
                   </button>
