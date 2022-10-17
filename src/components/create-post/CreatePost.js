@@ -1,14 +1,54 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./createpost.css";
 import { Avatar, Button } from "@mui/material";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import EmojiEmotionsOutlinedIcon from "@mui/icons-material/EmojiEmotionsOutlined";
 import GifBoxOutlinedIcon from "@mui/icons-material/GifBoxOutlined";
 import { useAddPostMutation } from "../../services/extendedApi";
-import { useSelector } from "react-redux";
 
 const TweetBox = () => {
+  const emojiData = [
+    "😀",
+    "😃",
+    "😄",
+    "😁",
+    "😆",
+    "😅",
+    "😂",
+    "🤣",
+    "🥲",
+    "😊",
+    "😇",
+    "😉",
+    "😌",
+    "😍",
+    "🥰",
+    "😘",
+    "😗",
+    "😙",
+    "😚",
+    "😋",
+    "😛",
+    "😞",
+    "😔",
+    "😟",
+    "😕",
+    "🙁",
+    "☹️",
+    "😣",
+    "😭",
+    "😮‍💨",
+    "😤",
+    "😠",
+    "😡",
+    "🤬",
+    "🥶",
+  ];
+
   const userInfo = localStorage.getItem("user");
+  const [emojiComponent, setEmojiComponent] = useState(false);
+  const imageUploadRef = useRef(null);
+  const [uploadImage, setUploadImage] = useState(null);
   // console.log(userInfo)
   const { firstName, lastName } = JSON.parse(userInfo);
   // console.log(firstName, lastName)
@@ -19,16 +59,17 @@ const TweetBox = () => {
   const submitHandler = async (e) => {
     let postText = postTextInputRef.current.value;
     e.preventDefault();
-    console.log(postText);
     if (postText) {
       let newPost = {
         comments: [],
         content: postText,
+        image: uploadImage || null,
         firstname: firstName,
         lastname: lastName,
       };
 
       await addPost(newPost);
+      setUploadImage(() => null);
       console.log(newPost);
     }
     clearFields();
@@ -36,6 +77,22 @@ const TweetBox = () => {
 
   const clearFields = () => {
     postTextInputRef.current.value = "";
+  };
+
+  const emojiHandler = () => {
+    setEmojiComponent((prevState) => !prevState);
+  };
+
+  const addEmoji = (emo) => {
+    postTextInputRef.current.value = `${postTextInputRef.current.value} ${emo}`;
+  };
+
+  const clickHandler = (event) => {
+    imageUploadRef.current.click();
+  };
+
+  const imageUploadChangeHandler = (event) => {
+    setUploadImage(() => URL.createObjectURL(event.target.files[0]));
   };
 
   return (
@@ -50,17 +107,38 @@ const TweetBox = () => {
             ref={postTextInputRef}
           />
         </div>
+        {uploadImage && (
+          <div className="image-uploaded m">
+            <p className="p">Image Uploaded</p>
+          </div>
+        )}
         <div className="tweet-box-utilities">
           <div className="tweet-box-utilities-left">
-            <ImageOutlinedIcon />
-            <EmojiEmotionsOutlinedIcon />
-            <GifBoxOutlinedIcon />
+            <ImageOutlinedIcon id="upload-img-post" onClick={clickHandler} />
+            <input
+              type="file"
+              style={{ display: "none" }}
+              ref={imageUploadRef}
+              onChange={imageUploadChangeHandler}
+            />
+            <EmojiEmotionsOutlinedIcon onClick={emojiHandler} />
           </div>
           <Button type="submit" variant="outlined" className="tweet-box-button">
             Post
           </Button>
         </div>
       </form>
+      {emojiComponent && (
+        <div className="emoji-component m">
+          {emojiData.map((emo) => {
+            return (
+              <span className="emoji" onClick={() => addEmoji(emo)} key={emo}>
+                {emo}
+              </span>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

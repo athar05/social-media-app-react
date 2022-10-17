@@ -13,8 +13,6 @@ import { useNavigate } from "react-router-dom";
 const Sidebar = () => {
   const navigate = useNavigate();
 
-  console.log(navigate);
-
   const clickHandler = () => {
     navigate("/home");
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });

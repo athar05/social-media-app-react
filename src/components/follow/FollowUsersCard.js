@@ -14,18 +14,18 @@ const FollowUsersCard = ({ data, error, isLoading, isSuccess }) => {
   const dispatch = useDispatch();
 
   const userData = JSON.parse(localStorage.getItem("user"));
-  const currentUsername = userData.username;
+  const currentFirstName = userData.firstName;
 
   const users = data?.users;
   const slicedUsers = users?.slice(0, 5);
 
   const [currentFollowers] = users
-    ? users.filter((user) => user.username === currentUsername)
+    ? users.filter((user) => user.firstName === currentFirstName)
     : [];
   const followingArray = currentFollowers?.following;
 
   const updatedUsers = users?.filter(
-    (user) => user.username !== currentUsername
+    (user) => user.firstName !== currentFirstName
   );
 
   //functionality to follow a user
@@ -34,6 +34,8 @@ const FollowUsersCard = ({ data, error, isLoading, isSuccess }) => {
 
   const addFollowerHandler = async (userId) => {
     const { data: userData, error } = await followUser(userId);
+    console.log("clicked");
+    console.log(userData);
     if (userData) {
       console.log(`You are now following ${userData.followUser.firstName}`);
       dispatch(
@@ -43,6 +45,7 @@ const FollowUsersCard = ({ data, error, isLoading, isSuccess }) => {
           id
         )
       );
+      console.log(userData);
       setTimeout(() => dispatch(removeAlert(id), 5000));
       dispatch(updateUser(userData.user));
     }

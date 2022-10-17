@@ -51,9 +51,6 @@ const PostCard = ({ posts }) => {
 
   const addLikeHandler = async (postId, post) => {
     await addLike({ postId });
-    // console.log("after like", userData)
-    // console.log("after like", data, error, isLoading, isSuccess)
-    // console.log( a, b)
   };
 
   //functionality to remove a like from a post
@@ -201,7 +198,13 @@ const PostCard = ({ posts }) => {
                   <p>{post.content}</p>
                 </div>
               </div>
-              {/* <img src='https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif' alt='gif'/> */}
+              {post.image && (
+                <img
+                  src={post.image}
+                  alt="uploaded-pic-by-user"
+                  style={{ height: "15rem", width: "18rem" }}
+                />
+              )}
 
               <div className="posts-footer">
                 {post.likes.likedBy.find(
