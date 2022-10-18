@@ -9,25 +9,31 @@ import { useDispatch } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
 import { updateUser } from "../../features/slices/authSlice";
 
-const FollowUsersCard = ({ data, error, isLoading, isSuccess }) => {
+const SearchUserFollowCard = ({
+  data,
+  searchData,
+  error,
+  isLoading,
+  isSuccess,
+}) => {
   const id = nanoid();
   const dispatch = useDispatch();
+  console.log(data);
 
   const userData = JSON.parse(localStorage.getItem("user"));
   const currentFirstName = userData.firstName;
 
-  const users = data?.users;
+  const users = data.users;
   const slicedUsers = users?.slice(0, 5);
+  console.log(users);
 
   const [currentFollowers] = users
     ? users.filter((user) => user.firstName === currentFirstName)
     : [];
 
+  console.log(currentFollowers);
   const followingArray = currentFollowers?.following;
-
-  const updatedUsers = users?.filter(
-    (user) => user.firstName !== currentFirstName
-  );
+  console.log(followingArray);
 
   //functionality to follow a user
 
@@ -35,6 +41,8 @@ const FollowUsersCard = ({ data, error, isLoading, isSuccess }) => {
 
   const addFollowerHandler = async (userId) => {
     const { data: userData, error } = await followUser(userId);
+    console.log("clicked");
+    console.log(userData);
     if (userData) {
       dispatch(
         setAlert(
@@ -55,6 +63,7 @@ const FollowUsersCard = ({ data, error, isLoading, isSuccess }) => {
   const removeFollowerHandler = async (userId) => {
     const { data: userData, error } = await unfollowUser(userId);
     if (userData) {
+      console.log(`You unfollowed ${userData.followUser.firstName}`);
       dispatch(
         setAlert(
           `You unfollowed ${userData.followUser.firstName}`,
@@ -71,8 +80,8 @@ const FollowUsersCard = ({ data, error, isLoading, isSuccess }) => {
     <Fragment>
       {isLoading && <h5 className="text-center p">Loading users...</h5>}
       {error && <h5 className="text-center p">Error in loading users....</h5>}
-      {isSuccess && users.length <= 5
-        ? updatedUsers?.map((user) => (
+      {isSuccess && users?.length <= 5
+        ? searchData?.map((user) => (
             <div className="follow-users-card p" key={user._id}>
               <div className="follow-users-card-users">
                 <div>
@@ -129,4 +138,4 @@ const FollowUsersCard = ({ data, error, isLoading, isSuccess }) => {
   );
 };
 
-export default FollowUsersCard;
+export default SearchUserFollowCard;

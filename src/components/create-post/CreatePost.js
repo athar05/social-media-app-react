@@ -59,10 +59,10 @@ const TweetBox = () => {
   const submitHandler = async (e) => {
     let postText = postTextInputRef.current.value;
     e.preventDefault();
-    if (postText) {
+    if (postText || uploadImage) {
       let newPost = {
         comments: [],
-        content: postText,
+        content: postText || null,
         image: uploadImage || null,
         firstname: firstName,
         lastname: lastName,
@@ -70,7 +70,6 @@ const TweetBox = () => {
 
       await addPost(newPost);
       setUploadImage(() => null);
-      console.log(newPost);
     }
     clearFields();
   };

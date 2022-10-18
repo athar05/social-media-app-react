@@ -33,8 +33,6 @@ const PostCard = ({ posts }) => {
 
   const dispatch = useDispatch();
 
-  console.log(posts);
-
   //get user
   const { _id: userId } = JSON.parse(localStorage.getItem("user"));
   const { data: userData } = useGetParticularUserQuery(userId);
@@ -172,7 +170,6 @@ const PostCard = ({ posts }) => {
                     <span className="posts-header-username">
                       <h4>@{post.username}</h4>
                     </span>
-                    {/* <span className='posts-header-timestamp'><h5>{post.createdAt}</h5></span> */}
                   </div>
                   {post.username === currentUsername && (
                     <div className="flex-row">
@@ -202,7 +199,11 @@ const PostCard = ({ posts }) => {
                 <img
                   src={post.image}
                   alt="uploaded-pic-by-user"
-                  style={{ height: "15rem", width: "18rem" }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
                 />
               )}
 
