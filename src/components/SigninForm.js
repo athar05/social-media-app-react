@@ -137,9 +137,9 @@ const SigninForm = () => {
             <Avatar className="form-avatar">
               <LoginIcon />
             </Avatar>
-            <h2>Sign In</h2>
+            <h2>Sign in</h2>
             <Typography className="py-1 text-dark">
-              Please Fill This Form To Sign In{" "}
+              Please fill this form to sign in{" "}
             </Typography>
           </Grid>
           <form onSubmit={submitHandler}>
@@ -149,8 +149,8 @@ const SigninForm = () => {
             <FormControl fullWidth sx={{ m: 1 }}>
               <TextField
                 fullWidth
-                name="username "
-                label="username"
+                name="Username "
+                label="Username"
                 variant="standard"
                 type="text"
                 required={true}
@@ -203,7 +203,7 @@ const SigninForm = () => {
               </Box>
             </div>
             <p className="my-1">
-              Don't have an account? <Link to="/signup">Register Now</Link>
+              Don't have an account? <Link to="/signup">Register now</Link>
             </p>
           </form>
         </Paper>

@@ -3,8 +3,12 @@ import "./createpost.css";
 import { Avatar, Button } from "@mui/material";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import EmojiEmotionsOutlinedIcon from "@mui/icons-material/EmojiEmotionsOutlined";
-import GifBoxOutlinedIcon from "@mui/icons-material/GifBoxOutlined";
+import { useDispatch } from "react-redux";
+import { setAlert } from "../../features/slices/alertSlice";
+import { removeAlert } from "../../features/slices/alertSlice";
+import { nanoid } from "@reduxjs/toolkit";
 import { useAddPostMutation } from "../../services/extendedApi";
+import Alerts from "../Alerts";
 
 const TweetBox = () => {
   const emojiData = [
@@ -45,6 +49,9 @@ const TweetBox = () => {
     "🥶",
   ];
 
+  const dispatch = useDispatch();
+  const id = nanoid();
+
   const userInfo = localStorage.getItem("user");
   const [emojiComponent, setEmojiComponent] = useState(false);
   const imageUploadRef = useRef(null);
@@ -70,6 +77,8 @@ const TweetBox = () => {
 
       await addPost(newPost);
       setUploadImage(() => null);
+      dispatch(setAlert("Your post has been added", "success", id));
+      setTimeout(() => dispatch(removeAlert(id), 5000));
     }
     clearFields();
   };

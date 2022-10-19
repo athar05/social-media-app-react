@@ -23,7 +23,7 @@ const Follow = () => {
         />
       </div>
       <div className="follow-container p">
-        <h3 className="text-center">Follow</h3>
+        <h3 className="text-center">Follow users</h3>
         {searchUser ? (
           <div className="follow-users">
             <SearchUserFollowCard

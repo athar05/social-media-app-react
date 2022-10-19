@@ -42,7 +42,7 @@ const BookmarkedPosts = ({ posts }) => {
   return (
     <Fragment>
       {posts?.length === 0 && (
-        <h3 className="text-centre p m">No Bookmarks Available</h3>
+        <h3 className="text-centre p m">No bookmarks available</h3>
       )}
       {posts?.map((post) => (
         <div className="posts" key={post?._id}>

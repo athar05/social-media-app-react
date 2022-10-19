@@ -18,22 +18,18 @@ const SearchUserFollowCard = ({
 }) => {
   const id = nanoid();
   const dispatch = useDispatch();
-  console.log(data);
 
   const userData = JSON.parse(localStorage.getItem("user"));
   const currentFirstName = userData.firstName;
 
   const users = data.users;
   const slicedUsers = users?.slice(0, 5);
-  console.log(users);
 
   const [currentFollowers] = users
     ? users.filter((user) => user.firstName === currentFirstName)
     : [];
 
-  console.log(currentFollowers);
   const followingArray = currentFollowers?.following;
-  console.log(followingArray);
 
   //functionality to follow a user
 
@@ -41,8 +37,6 @@ const SearchUserFollowCard = ({
 
   const addFollowerHandler = async (userId) => {
     const { data: userData, error } = await followUser(userId);
-    console.log("clicked");
-    console.log(userData);
     if (userData) {
       dispatch(
         setAlert(

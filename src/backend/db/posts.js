@@ -45,7 +45,7 @@ export const posts = [
     _id: uuid(),
     content: "What's up?",
     likes: {
-      likeCount: 0,
+      likeCount: 2,
       likedBy: [],
       dislikedBy: [],
     },

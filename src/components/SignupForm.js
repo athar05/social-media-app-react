@@ -176,9 +176,9 @@ const SignupForm = () => {
             <Avatar className="form-avatar">
               <LockOpenIcon />
             </Avatar>
-            <h2>Sign Up</h2>
+            <h2>Sign up</h2>
             <Typography className="py-1 text-dark">
-              Please Fill This Form To Create An Account{" "}
+              Please fill this form to create an account{" "}
             </Typography>
           </Grid>
           <form onSubmit={submitHandler}>

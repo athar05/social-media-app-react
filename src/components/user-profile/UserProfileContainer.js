@@ -36,7 +36,7 @@ const UserProfileContainer = () => {
   return (
     <div className="user-profile-details m">
       <Alerts />
-      <h2>Your Profile</h2>
+      <h2>Your profile</h2>
       <div>
         <div className="profile-pic">
           <Avatar
