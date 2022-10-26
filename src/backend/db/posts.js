@@ -23,7 +23,7 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "shubhamsoni",
+        username: "tester",
         text: "Interesting",
         votes: {
           upvotedBy: [],
@@ -32,7 +32,7 @@ export const posts = [
       },
       {
         _id: uuid(),
-        username: "sohamshah",
+        username: "doejohn",
         text: "Wow!",
         votes: {
           upvotedBy: [],
@@ -45,7 +45,7 @@ export const posts = [
     _id: uuid(),
     content: "What's up?",
     likes: {
-      likeCount: 0,
+      likeCount: 2,
       likedBy: [],
       dislikedBy: [],
     },
@@ -57,16 +57,7 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "shubhamsoni",
-        text: "Interesting",
-        votes: {
-          upvotedBy: [],
-          downvotedBy: [],
-        },
-      },
-      {
-        _id: uuid(),
-        username: "sohamshah",
+        username: "sakpataudi",
         text: "Wow!",
         votes: {
           upvotedBy: [],
@@ -91,17 +82,8 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "shubhamsoni",
-        text: "Interesting",
-        votes: {
-          upvotedBy: [],
-          downvotedBy: [],
-        },
-      },
-      {
-        _id: uuid(),
-        username: "sohamshah",
-        text: "Wow!",
+        username: "athar05",
+        text: "All good mate",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -111,7 +93,7 @@ export const posts = [
   },
   {
     _id: uuid(),
-    content: "At",
+    content: "What are the best places to eat in Bangalore?",
     likes: {
       likeCount: 3,
       likedBy: [],
@@ -126,8 +108,8 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "shubhamsoni",
-        text: "Interesting",
+        username: "sakpataudi",
+        text: "Truffles",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -135,17 +117,8 @@ export const posts = [
       },
       {
         _id: uuid(),
-        username: "sohamshah",
-        text: "Cute!",
-        votes: {
-          upvotedBy: [],
-          downvotedBy: [],
-        },
-      },
-      {
-        _id: uuid(),
-        username: "Laal Singh Chaddha",
-        text: "Fantastic!",
+        username: "doejohn",
+        text: "Hole in the wall cafe!!!!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],

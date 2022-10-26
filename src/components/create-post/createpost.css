@@ -14,7 +14,7 @@
 }
 
 .tweet-box-input > textarea {
-    flex: 1; 
+    flex: 1;
     padding-left: 1.2rem;
     border: none;
     font-size: 1.1rem;
@@ -22,11 +22,11 @@
     resize: none;
     overflow: hidden;
     padding: 0.25rem 0.25rem;
+    height: 100px;
 }
 
 .tweet-box-input > textarea:focus{
     outline: none;
-    height: 100px;
 }
 
 .tweet-box .tweet-box-button {
@@ -70,3 +70,37 @@
     transition: color 1ms ease-out;
     cursor: pointer;
 }
+
+.tweet-box{
+    position: relative;
+  }
+
+  .emoji-component {
+    background-color: var(--background-color);
+    width: 10rem;
+    flex-wrap: wrap;
+    cursor: pointer;
+    position:absolute;
+    z-index: 1;
+  }
+
+  .emoji-component>.emoji:hover{
+    opacity: 0.8;
+  }
+
+  .image-uploaded {
+    background-color: var(--primary);
+    font-size: 0.7rem;
+    display: flex;
+    justify-content: center;
+    width: 9rem;
+    height: 2rem;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+    /* background-color: black; */
+  }
+
+  .image-uploaded > .remove-image:hover{
+    opacity: 0.8;
+  }

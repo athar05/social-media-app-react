@@ -28,14 +28,10 @@ const EditProfileComponent = () => {
   } = JSON.parse(localStorage.getItem("user"));
   const encodedToken = JSON.parse(localStorage.getItem("auth_token"));
 
-  const userFirstNameInputRef = useRef();
-  const userUserNameInputRef = useRef();
   const userBioInputRef = useRef();
   const userProfileUrlInputRef = useRef();
 
   const clearFields = () => {
-    userFirstNameInputRef.current.value = "";
-    userUserNameInputRef.current.value = "";
     userBioInputRef.current.value = "";
     userProfileUrlInputRef.current.value = "";
   };
@@ -62,14 +58,6 @@ const EditProfileComponent = () => {
     e.preventDefault();
 
     const userData = {
-      firstName:
-        userFirstNameInputRef?.current?.value.length > 0
-          ? userFirstNameInputRef?.current?.value
-          : firstName,
-      username:
-        userUserNameInputRef?.current?.value.length > 0
-          ? userUserNameInputRef?.current?.value
-          : username,
       bio:
         userBioInputRef?.current?.value.length > 0
           ? userBioInputRef?.current?.value
@@ -99,26 +87,6 @@ const EditProfileComponent = () => {
       <h2>Edit Profile</h2>
       <Box>
         <form className="edit-profile-component-form m">
-          <FormControl sx={{ m: 1 }}>
-            <TextField
-              inputRef={userFirstNameInputRef}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">First Name:</InputAdornment>
-                ),
-              }}
-            />
-          </FormControl>
-          <FormControl sx={{ m: 1 }}>
-            <TextField
-              inputRef={userUserNameInputRef}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">User Name:</InputAdornment>
-                ),
-              }}
-            />
-          </FormControl>
           <FormControl sx={{ m: 1 }}>
             <TextField
               inputRef={userBioInputRef}

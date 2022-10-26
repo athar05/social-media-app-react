@@ -11,8 +11,6 @@ import {
 const Post = () => {
   const { data } = useGetUsersQuery();
 
-  console.log(data);
-
   const { _id: userId, firstName: userFirstName } = JSON.parse(
     localStorage.getItem("user")
   );
@@ -20,7 +18,6 @@ const Post = () => {
   const followingUsers = userData?.user?.following;
 
   const followingArray = followingUsers?.map((el) => el.firstName);
-  console.log(followingArray);
 
   //get posts
   const { data: poData, error, isLoading, isSuccess } = useGetPostsQuery();
@@ -47,8 +44,6 @@ const Post = () => {
 
     return uniquePosts;
   };
-
-  console.log(followingArray);
 
   const updatedPosts = getPosts(
     allPosts,

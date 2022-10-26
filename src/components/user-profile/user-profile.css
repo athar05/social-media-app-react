@@ -20,7 +20,7 @@
     align-items: center;
 }
 
-.profile-button {
+.edit-profile-component .edit-profile-component-form .profile-button {
     background-color: var(--primary);
     color: var(--white);
     border: none;

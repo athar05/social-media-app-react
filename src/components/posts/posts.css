@@ -4,16 +4,19 @@
     border-bottom: 1px solid var(--border-color);
     padding: 0.2rem 0.2rem;
     transition: ease-out 8ms;
+    max-width: 500px;
 }
 
 .posts:hover {
-    cursor: pointer;
+    /* cursor: pointer; */
     background-color: #e9efef;
 }
 
 .posts-body {
     flex: 1;
     padding: 0.5rem 0.5rem;
+    width: -webkit-min-content;
+    width: -moz-min-content;
     width: min-content;
 }
 
@@ -98,7 +101,7 @@
 .posts-body .posts-footer .active-button {
     color: var(--red) !important;
     /* background-color: var(--red) !important; */
-    
+
 }
 
 .posts-header-text {
@@ -123,6 +126,9 @@
 .posts-description {
     margin-bottom: 0.5rem;
     font-size: 1rem;
+    /* overflow-wrap: break-word;
+    word-wrap: break-word; */
+    word-break: break-word;
 }
 
 .add-comments {
@@ -151,7 +157,7 @@
 .posts-body .add-comments > Button {
     height: 22px;
     color: var(--primary);
-    background-color: transparent;  
+    background-color: transparent;
     min-width: 0rem;
 }
 
